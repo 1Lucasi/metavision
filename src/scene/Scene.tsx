@@ -7,7 +7,7 @@ import { Model } from './Model'
 
 function Rig() {
   const controls = useRef<CameraControls>(null)
-  const organoSelecionado = useStore((s) => s.organoSelecionado)
+  const orgaosSelecionados = useStore((s) => s.orgaosSelecionados)
 
   // Enquadramento inicial: foca a cena inteira assim que monta.
   useEffect(() => {
@@ -20,36 +20,33 @@ function Rig() {
     }
   }, [])
 
-  // Passos 4/5/6: bounding box do órgão + anima câmera até ele.
-  // Passo 7: null -> reenquadra a cena inteira.
+  // Reenquadra sempre que a seleção muda.
+  // - vazio -> cena inteira
+  // - 1+ órgãos -> caixa que ENVOLVE todos os selecionados (ex: coração inteiro)
   useEffect(() => {
     const cc = controls.current
     if (!cc) return
     const scene = cc.camera.parent
     if (!scene) return
 
-    if (!organoSelecionado) {
+    if (orgaosSelecionados.length === 0) {
       const box = new Box3().setFromObject(scene)
       if (!box.isEmpty()) cc.fitToBox(box, true, framePadding)
       return
     }
 
-    let target: Object3D | null = null
-    scene.traverse((n) => {
-      if (n.name === organoSelecionado) target = n
+    // Une as bounding boxes de todos os órgãos marcados num box só.
+    const alvo = new Set(orgaosSelecionados)
+    const box = new Box3()
+    scene.traverse((n: Object3D) => {
+      if (!alvo.has(n.name)) return
+      // Garante a matriz world atual (o <Center> reposiciona o modelo no load)
+      // antes de somar este órgão à caixa de enquadramento.
+      n.updateWorldMatrix(true, false)
+      box.expandByObject(n)
     })
-    if (target) {
-      const t = target as Object3D
-      // Mede a box ignorando visibilidade/timing: torna visível só pra medir,
-      // força a matriz world (o <Center> move o modelo no mesmo frame), restaura.
-      const prev = t.visible
-      t.visible = true
-      t.updateWorldMatrix(true, false)
-      const box = new Box3().setFromObject(t)
-      t.visible = prev
-      if (!box.isEmpty()) cc.fitToBox(box, true, framePadding)
-    }
-  }, [organoSelecionado])
+    if (!box.isEmpty()) cc.fitToBox(box, true, framePadding)
+  }, [orgaosSelecionados])
 
   return <CameraControls ref={controls} minDistance={0.05} maxDistance={5} />
 }

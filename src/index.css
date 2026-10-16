@@ -32,7 +32,12 @@ button:hover { background: #2ea043; }
 
 .lista { max-height: 40vh; overflow-y: auto; }
 .grupo { margin-bottom: 10px; }
-.grupo-nome { display: block; font-size: 11px; text-transform: uppercase; opacity: 0.5; margin: 6px 0 3px; }
+.grupo-head {
+  display: flex; align-items: center; gap: 8px; cursor: pointer;
+  margin: 6px 0 3px;
+}
+.grupo-head input { cursor: pointer; }
+.grupo-nome { font-size: 11px; text-transform: uppercase; opacity: 0.5; }
 .item {
   display: flex; align-items: center; gap: 8px; width: 100%; text-align: left;
   background: transparent; color: #e6edf3; padding: 5px 8px; border-radius: 6px;
@@ -41,4 +46,19 @@ button:hover { background: #2ea043; }
 .item input { cursor: pointer; }
 .item:hover { background: rgba(255,255,255,0.06); }
 .item.ativo { background: #1f6feb; border-color: #388bfd; }
-.muted-sm { font-size: 11px; text-transform: uppercase; opacity: 0.5; margin-bottom: 2px; }
+.muted-sm { font-size: 11px; text-transform: uppercase; opacity: 0.5; margin-bottom: 8px; }
+
+.panel-right { max-width: 260px; }
+.selecao-lista { max-height: 40vh; overflow-y: auto; margin-bottom: 12px; }
+.selecao-item {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  font-size: 13px; padding: 4px 0;
+}
+.selecao-grupo {
+  display: block; font-size: 10px; text-transform: uppercase; opacity: 0.5;
+}
+.btn-x {
+  background: transparent; color: #e6edf3; border: 0; font-size: 18px;
+  line-height: 1; padding: 0 4px; cursor: pointer; opacity: 0.6;
+}
+.btn-x:hover { background: transparent; opacity: 1; color: #f85149; }

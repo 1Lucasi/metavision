@@ -10,10 +10,13 @@ const GRUPOS = ORGANS.reduce<Record<string, typeof ORGANS>>((acc, o) => {
 export function Controls() {
   const layerVisible = useStore((s) => s.layerVisible)
   const toggleLayer = useStore((s) => s.toggleLayer)
-  const organoSelecionado = useStore((s) => s.organoSelecionado)
-  const selecionarOrgao = useStore((s) => s.selecionarOrgao)
+  const orgaosSelecionados = useStore((s) => s.orgaosSelecionados)
+  const alternarOrgao = useStore((s) => s.alternarOrgao)
+  const alternarGrupo = useStore((s) => s.alternarGrupo)
+  const limparSelecao = useStore((s) => s.limparSelecao)
 
-  const organ = organoSelecionado ? ORGAN_BY_ID[organoSelecionado] : null
+  // Set pra checar "está selecionado?" em O(1) na renderização da lista.
+  const selecionados = new Set(orgaosSelecionados)
 
   return (
     <>
@@ -33,36 +36,76 @@ export function Controls() {
 
         <h3 style={{ marginTop: 16 }}>Estruturas</h3>
         <div className="lista">
-          {Object.entries(GRUPOS).map(([grupo, partes]) => (
-            <div key={grupo} className="grupo">
-              <span className="grupo-nome">{grupo}</span>
-              {partes.map((p) => (
-                <label
-                  key={p.id}
-                  className={`item ${organoSelecionado === p.id ? 'ativo' : ''}`}
-                >
+          {Object.entries(GRUPOS).map(([grupo, partes]) => {
+            const ids = partes.map((p) => p.id)
+            const todos = ids.every((id) => selecionados.has(id))
+            const alguns = !todos && ids.some((id) => selecionados.has(id))
+            return (
+              <div key={grupo} className="grupo">
+                {/* Checkbox do grupo: marca/desmarca as partes todas de uma vez
+                    (ex: liga os 4 pedaços do coração num clique). */}
+                <label className="grupo-head">
                   <input
                     type="checkbox"
-                    checked={organoSelecionado === p.id}
-                    onChange={() =>
-                      selecionarOrgao(organoSelecionado === p.id ? null : p.id)
-                    }
+                    checked={todos}
+                    // indeterminate = alguns (mas não todos) marcados
+                    ref={(el) => {
+                      if (el) el.indeterminate = alguns
+                    }}
+                    onChange={() => alternarGrupo(ids)}
                   />
-                  {p.label}
+                  <span className="grupo-nome">{grupo}</span>
                 </label>
-              ))}
-            </div>
-          ))}
+
+                {partes.map((p) => (
+                  <label
+                    key={p.id}
+                    className={`item ${selecionados.has(p.id) ? 'ativo' : ''}`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={selecionados.has(p.id)}
+                      onChange={() => alternarOrgao(p.id)}
+                    />
+                    {p.label}
+                  </label>
+                ))}
+              </div>
+            )
+          })}
         </div>
       </div>
 
-      {/* Painel do mesh em destaque (passo 7: botão voltar) */}
-      {organ && (
+      {/* Painel dos meshes em destaque */}
+      {orgaosSelecionados.length > 0 && (
         <div className="panel panel-right">
-          <p className="muted-sm">{organ.grupo}</p>
-          <h3>{organ.label}</h3>
+          <p className="muted-sm">
+            {orgaosSelecionados.length} estrutura
+            {orgaosSelecionados.length > 1 ? 's' : ''}
+          </p>
+          <div className="selecao-lista">
+            {orgaosSelecionados.map((id) => {
+              const o = ORGAN_BY_ID[id]
+              if (!o) return null
+              return (
+                <div key={id} className="selecao-item">
+                  <span>
+                    <span className="selecao-grupo">{o.grupo}</span>
+                    {o.label}
+                  </span>
+                  <button
+                    className="btn-x"
+                    title="Remover da seleção"
+                    onClick={() => alternarOrgao(id)}
+                  >
+                    ×
+                  </button>
+                </div>
+              )
+            })}
+          </div>
           <p className="muted">Gire para ver em 360°.</p>
-          <button onClick={() => selecionarOrgao(null)}>← Voltar</button>
+          <button onClick={() => limparSelecao()}>← Voltar</button>
         </div>
       )}
     </>
