@@ -722,3 +722,4 @@ Caso a equipe adote uma licença formal de software, substituir este texto e inc
 ---
 
 > Este README segue o modelo de documentação proposto pelo professor Daniel Ohata para a disciplina de UPX — Realidade Aumentada (Facens).
+
