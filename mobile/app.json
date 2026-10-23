@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "WL02 Spatial AR",
+    "slug": "wl02-spatial-ar",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "newArchEnabled": true,
+    "plugins": [
+      [
+        "@reactvision/react-viro",
+        {
+          "android": {
+            "xRMode": "AR"
+          },
+          "cameraUsagePermission": "O aplicativo usa a camera para detectar superficies e posicionar conteudo em realidade aumentada."
+        }
+      ]
+    ],
+    "android": {
+      "package": "edu.facens.wl02spatialar",
+      "versionCode": 1
+    },
+    "ios": {
+      "bundleIdentifier": "edu.facens.wl02spatialar",
+      "buildNumber": "1"
+    }
+  }
+}
