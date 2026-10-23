@@ -62,3 +62,62 @@ button:hover { background: #2ea043; }
   line-height: 1; padding: 0 4px; cursor: pointer; opacity: 0.6;
 }
 .btn-x:hover { background: transparent; opacity: 1; color: #f85149; }
+
+.organ-info-focus {
+  background: transparent; color: inherit; padding: 0; border-radius: 0;
+  font: inherit; text-align: left; min-width: 0;
+}
+.organ-info-focus:hover { background: transparent; text-decoration: underline; }
+.organ-info-focus[aria-pressed="true"] { text-decoration: underline; text-underline-offset: 3px; }
+
+.organ-info-overlay {
+  position: absolute; top: 76px; bottom: 32px;
+  left: var(--organ-info-left, 250px); right: var(--organ-info-right, 300px);
+  color: #e6edf3; pointer-events: none;
+}
+.organ-info-title {
+  position: absolute; top: -32px; left: 50%; transform: translateX(-50%);
+  max-width: 220px; font-size: 13px; font-weight: 600; text-align: center;
+  pointer-events: auto;
+}
+.organ-info {
+  display: grid; height: 100%; min-width: 0; margin: 0;
+  grid-template-columns: minmax(160px, 1fr) clamp(280px, 40vh, 480px) minmax(160px, 1fr);
+  grid-template-rows: 1fr 1fr; gap: 32px;
+}
+.organ-info-box {
+  min-width: 0; padding: 10px; border-radius: 8px;
+  background: rgba(31,36,43,0.96); border: 1px solid rgba(255,255,255,0.08);
+  font-size: 13px; line-height: 1.5; overflow-wrap: anywhere;
+  max-height: 100%; overflow-y: auto; pointer-events: auto;
+}
+.organ-info-location {
+  grid-column: 1; grid-row: 1 / 3; align-self: start; justify-self: end;
+  width: 220px; max-width: 100%; margin-top: 20vh;
+}
+.organ-info-function, .organ-info-detail {
+  grid-column: 3; align-self: start; width: 220px;
+  max-width: 100%;
+}
+.organ-info-function { grid-row: 1; margin-top: 40px; }
+.organ-info-detail { grid-row: 2; }
+.organ-info-box dt { font-weight: 600; margin-bottom: 4px; }
+.organ-info-box dd { margin: 0; }
+
+@media (max-width: 1279px), (max-height: 600px), (max-aspect-ratio: 3/2) {
+  .app:has(.organ-info-overlay) { overflow-y: auto; background: #0f1419; }
+  .organ-info-overlay {
+    top: var(--organ-info-below, 100%); bottom: auto; left: 16px; right: 16px;
+    padding: 16px 0; pointer-events: auto;
+  }
+  .organ-info-title { position: static; transform: none; max-width: none; text-align: left; margin-bottom: 12px; }
+  .organ-info { height: auto; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto; gap: 8px; }
+  .organ-info-location, .organ-info-function, .organ-info-detail {
+    grid-column: auto; grid-row: auto; align-self: stretch; justify-self: stretch;
+    width: auto; max-width: none; margin: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .organ-info { grid-template-columns: minmax(0, 1fr); }
+}
