@@ -6,7 +6,7 @@
 ![Status](https://img.shields.io/badge/status-protótipo%20funcional-brightgreen)
 ![Plataforma](https://img.shields.io/badge/plataforma-Android-green)
 ![RA](https://img.shields.io/badge/RA-ViroReact%20%2B%20ARCore-orange)
-![Node](https://img.shields.io/badge/Node-20%20-%2022-black)
+![Node](https://img.shields.io/badge/Node-20%20a%2022-black)
 ![ODS](https://img.shields.io/badge/ODS-4%20%7C%203-informational)
 
 ---
@@ -25,13 +25,13 @@
 
 ### Integrantes
 
-| Nome | RA | Responsabilidade técnica |
+| Nome | RA | Responsabilidade |
 |---|---|---|
 | Carolina Leamari | 235249 | Aquisição e preparação dos assets 3D (Blender, Z-Anatomy/NIH 3D, exportação GLB) |
 | Eduarda Gomes Abreu e Almeida | 236021 | Interação — seleção de órgãos, isolamento e navegação |
 | Fernanda Theodoro Casali | 235329 | Documentação técnica, pesquisa e artigo científico |
 | Gabriel Baldi Gomes dos Santos | 235452 | Interação por toque e validação da renderização em RA |
-| Gabriel Massayuki Teixeira Ogino | 236044 | Interação — enquadramento de câmera e transições |
+| Gabriel Massayuki Teixeira Ogino | 236044 | Interação — enquadramento e transições |
 | Higor Bertinotti Aranda | 235332 | Desenvolvimento 3D e visualização |
 | Lucas Proença Gonçalves do Santos | 235411 | Desenvolvimento 3D, pipeline de modelos e integração ViroReact |
 
@@ -99,7 +99,7 @@ Desenvolver e avaliar um aplicativo móvel de Realidade Aumentada com órgãos i
 
 **Nível de familiaridade tecnológica.** Alto para uso de smartphones, mas sem experiência prévia pressuposta em Realidade Aumentada — por isso a tela inicial traz instrução explícita de como detectar e tocar o plano.
 
-**Limitações do público.** Depende de dispositivo Android compatível com ARCore. A lista de materiais de persona e jornada do usuário está em `docs/documents/`.
+**Limitações do público.** Depende de dispositivo Android compatível com ARCore. Materiais complementares de persona e jornada do usuário estão em `docs/documents/`.
 
 ---
 
@@ -136,9 +136,9 @@ Desenvolver e avaliar um aplicativo móvel de Realidade Aumentada com órgãos i
 
 | ID | Categoria | Requisito |
 |---|---|---|
-| RNF01 | Compatibilidade | O aplicativo deverá executar em Android compatível com ARCore (Google Play Services for AR) |
-| RNF02 | Hardware | O dispositivo deverá possuir câmera traseira e sensores de movimento utilizados pelo ARCore |
-| RNF03 | Desempenho | Os 23 modelos somados deverão ocupar no máximo cerca de 3 MB, para manter o carregamento e o uso de memória adequados ao dispositivo móvel |
+| RNF01 | Compatibilidade | A aplicação deverá executar em Android compatível com ARCore (Google Play Services for AR) |
+| RNF02 | Hardware | O dispositivo deverá possuir câmera traseira e os sensores de movimento utilizados pelo ARCore |
+| RNF03 | Desempenho | Os 23 modelos somados deverão ocupar no máximo cerca de 3 MB, mantendo carregamento e uso de memória adequados ao dispositivo móvel |
 | RNF04 | Usabilidade | O usuário deverá conseguir posicionar o modelo e isolar um órgão em poucos toques, sem treinamento prévio |
 | RNF05 | Usabilidade | Órgãos encobertos deverão ser alcançáveis sem depender do toque direto na cena |
 | RNF06 | Conectividade | Após instalado, o aplicativo deverá funcionar sem conexão com a internet — os modelos são embarcados no pacote |
@@ -151,7 +151,7 @@ Desenvolver e avaliar um aplicativo móvel de Realidade Aumentada com órgãos i
 
 ### Aplicativo mobile (projeto principal)
 
-| Tecnologia | Versão | Utilização no projeto |
+| Tecnologia | Versão | Utilização |
 |---|---|---|
 | React Native | 0.86.3 | Framework da aplicação móvel |
 | Expo | 57.0.23 | Toolchain, build nativo e configuração via plugins |
@@ -163,10 +163,12 @@ Desenvolver e avaliar um aplicativo móvel de Realidade Aumentada com órgãos i
 | Metro | padrão do Expo 57 | Bundler, configurado para aceitar `.glb` como asset |
 | Node.js | 20 LTS a 22 LTS | Ambiente de build (`engines: >=20 <23`) |
 | Android Studio + Platform Tools | — | SDK Android, `adb` e compilação nativa |
+| Git | 2.x | Controle de versão |
+| GitHub | — | Hospedagem do projeto e documentação |
 
 ### Preparação dos modelos 3D
 
-| Tecnologia | Versão | Utilização no projeto |
+| Tecnologia | Versão | Utilização |
 |---|---|---|
 | Blender | 3.6 LTS | Modelagem e exportação dos órgãos (a versão 4.x é incompatível com o template Z-Anatomy) |
 | Z-Anatomy | — | Template anatômico open source usado como base |
@@ -176,7 +178,7 @@ Desenvolver e avaliar um aplicativo móvel de Realidade Aumentada com órgãos i
 
 ### Protótipo web (precursor, mantido no repositório)
 
-| Tecnologia | Versão | Utilização no projeto |
+| Tecnologia | Versão | Utilização |
 |---|---|---|
 | Vite | 5.4.x | Build e servidor de desenvolvimento |
 | Three.js | 0.169.x | Renderização 3D via WebGL |
@@ -185,7 +187,7 @@ Desenvolver e avaliar um aplicativo móvel de Realidade Aumentada com órgãos i
 
 ### Gestão e colaboração
 
-Trello (quadro Metavision), Miro (fluxo do app), Google Drive (documentos), Discord (comunicação), GitHub (código e documentação) e Google Forms (coleta do SUS).
+Trello (quadro Metavision), Google Drive (documentos), Discord (comunicação) e Google Forms (coleta do SUS).
 
 ---
 
@@ -197,8 +199,7 @@ Trello (quadro Metavision), Miro (fluxo do app), Google Drive (documentos), Disc
 | Notebook de desenvolvimento | Dell G15 | Windows 11 64-bit | Desenvolvimento, build nativo e preparação dos modelos 3D | 
 Notebook de desenvolvimento | Vivobook ASUS | Windows 11 64-bit | Desenvolvimento, build nativo e preparação dos modelos 3D | 
 Notebook de desenvolvimento | Nitro v15 | Windows 11 64-bit | Desenvolvimento, build nativo e preparação dos modelos 3D |
-
-O aparelho precisa constar na lista de dispositivos compatíveis com ARCore e ter o **Google Play Services for AR** instalado.
+O aparelho precisa constar na lista de dispositivos compatíveis com ARCore e ter o **Google Play Services for AR** instalado. Não é declarada compatibilidade com equipamentos que não tenham sido testados.
 
 ---
 
@@ -240,22 +241,32 @@ O MetaVision usa **RA markerless com detecção de planos** (*plane detection*).
 
 ![Fluxo técnico da Realidade Aumentada](docs/diagrams/fluxo-ra.png)
 
-1. O aplicativo abre e o `ViroARSceneNavigator` inicia a sessão de RA, pedindo permissão de câmera.
+1. A aplicação inicia e o `ViroARSceneNavigator` abre a sessão de RA, solicitando permissão de câmera.
 2. A `ViroARScene` é configurada com `anchorDetectionTypes={["PlanesHorizontal"]}`.
-3. O ARCore detecta superfícies horizontais e emite eventos de anchor.
-4. A `ViroARScene` **encaminha explicitamente** esses eventos ao seletor de planos, por meio de `handleAnchorFound`, `handleAnchorUpdated` e `handleAnchorRemoved`. Esse encaminhamento é obrigatório a partir do ViroReact 2.53 e está implementado em `src/ar/SpatialScene.tsx`.
+3. O ARCore analisa continuamente as imagens da câmera e os sensores, detectando superfícies horizontais.
+4. A `ViroARScene` **encaminha explicitamente** os eventos de anchor ao seletor de planos, por meio de `handleAnchorFound`, `handleAnchorUpdated` e `handleAnchorRemoved`. Esse encaminhamento é obrigatório a partir do ViroReact 2.53 e está implementado em `src/ar/SpatialScene.tsx`.
 5. O `ViroARPlaneSelector` destaca os planos detectados e aguarda o toque do usuário.
-6. Ao tocar num plano, `corpoNaMesa` passa a `true` e os 23 `Viro3DObject` são instanciados.
+6. Ao tocar num plano, `corpoNaMesa` passa a `true` e os 23 `Viro3DObject` são instanciados no ponto escolhido.
 7. Como os vértices de cada GLB já estão na posição final (ver `scripts/split.mjs`), todos os órgãos são colocados em `[0, 0, 0]` e se encaixam automaticamente, reconstruindo o modelo completo.
-8. A partir daí, o usuário interage: toque para selecionar, menu para alcançar órgãos encobertos, gestos para mover e escalar, botões para girar, voltar e resetar.
+8. O usuário interage: toque para selecionar, menu para alcançar órgãos encobertos, gestos para mover e escalar, botões para girar, voltar e resetar.
 
-### 11.3 Decisões técnicas relevantes
+### 11.3 Elementos virtuais
+
+- modelo anatômico 3D composto por 23 órgãos independentes;
+- destaque visual dos planos horizontais detectados;
+- painel de descrição com localização, função e detalhe anatômico;
+- menu de navegação com os 9 grupos de órgãos e suas partes;
+- botões de giro (±30°), voltar e reset;
+- indicação de estado (`Toque num órgão`, nome do grupo ou da parte selecionada);
+- card de instrução inicial, exibido até o corpo ser posicionado.
+
+### 11.4 Decisões técnicas relevantes
 
 **Gestos no nó pai.** Os gestos (`onDrag`, `onPinch`, `onRotate`) ficam no `ViroNode` que envolve todos os órgãos, e não em cada objeto. Assim, arrastar o modelo funciona tocando em qualquer parte dele, porque o evento sobe do órgão para o nó pai.
 
 **Dois nós aninhados.** O nó externo recebe os gestos do usuário; o nó interno aplica o enquadramento (centro e zoom) calculado quando um órgão é isolado. Separar as duas responsabilidades evita que o enquadramento automático conflite com a manipulação manual.
 
-**Enquadramento por bounding box.** Ao isolar uma estrutura, a função `enquadrar()` une as *bounding boxes* das peças visíveis (pré-calculadas em `src/ar/caixas.ts`), move o conjunto para o centro do corpo — `[0, 0.314, 0]`, metade da altura de ~63 cm do modelo — e o amplia até atingir cerca de 35 cm, limitado a 3×. O órgão isolado aparece onde o usuário já está olhando, em vez de ficar na posição anatômica original.
+**Enquadramento por bounding box.** Ao isolar uma estrutura, a função `enquadrar()` une as *bounding boxes* das peças visíveis (pré-calculadas em `src/ar/caixas.ts`), move o conjunto para o centro do corpo — `[0, 0.314, 0]`, metade da altura de ~63 cm do modelo — e o amplia até atingir cerca de 35 cm, limitado a 3×. O órgão isolado aparece onde o usuário já está olhando, em vez de permanecer na posição anatômica original.
 
 **Giro por botão, não por gesto.** O gesto de rotação de dois dedos do ViroReact testa o ponto médio entre os dedos, que frequentemente cai fora da malha do órgão e não registra o gesto. Por isso o giro foi implementado como botões de ±30° no HUD, que agem sobre o estado `rotacaoY`.
 
@@ -310,6 +321,7 @@ metavision/
 │   ├── images/                      # capturas de tela do aplicativo
 │   └── documents/                   # documentos complementares
 │
+├── .gitignore
 └── README.md
 ```
 
@@ -322,11 +334,15 @@ metavision/
 | `mobile/assets/modelos` | Modelos GLB embarcados no aplicativo |
 | `scripts` | Pipeline que transforma o modelo do Blender nos assets finais |
 | `src`, `public` | Protótipo web, mantido como referência da etapa anterior |
-| `docs` | Diagramas, imagens e documentos da documentação técnica |
+| `docs/diagrams` | Diagramas técnicos |
+| `docs/images` | Capturas de tela do aplicativo |
+| `docs/documents` | Documentos complementares |
 
 ---
 
-## 13. Principais Componentes
+## 13. Principais Scripts e Componentes
+
+O projeto não utiliza scripts no formato Unity/C#. Os componentes equivalentes, produzidos pela equipe, são:
 
 | Arquivo | Responsabilidade |
 |---|---|
@@ -337,6 +353,7 @@ metavision/
 | `mobile/src/ar/modelos.ts` | Mapeia o id de cada órgão ao `require()` do seu arquivo GLB — caminho literal, exigido pelo Metro |
 | `mobile/src/ar/caixas.ts` | Bounding box de cada órgão, usada para centralizar e dimensionar a estrutura isolada |
 | `mobile/metro.config.js` | Adiciona `glb` a `resolver.assetExts`, permitindo embarcar os modelos |
+| `mobile/scripts/verify-project.mjs` | Valida arquivos obrigatórios, versões fixadas e a configuração de RA |
 | `scripts/split.mjs` | Divide `conjunto.glb` em um GLB por nó, preservando a posição original dos vértices |
 | `scripts/centros.mjs` | Calcula as bounding boxes que alimentam `caixas.ts` |
 | `scripts/optimize.mjs` | Otimiza o GLB exportado do Blender (weld, simplify, prune) |
@@ -378,7 +395,7 @@ typescript                5.9.3
 @types/react              19.2.2
 ```
 
-O ViroReact é obtido pelo npm e configurado como plugin do Expo em `app.json`. O ARCore é fornecido pelo **Google Play Services for AR**, instalado no próprio aparelho Android pela Play Store.
+O ViroReact é obtido pelo npm (`https://www.npmjs.com/package/@reactvision/react-viro`) e configurado como plugin do Expo em `app.json`. O ARCore é fornecido pelo **Google Play Services for AR**, instalado no próprio aparelho Android pela Play Store.
 
 > O aplicativo usa módulos nativos de RA e **não funciona no Expo Go** — é necessário gerar o build nativo com `expo prebuild` e `expo run:android`.
 
@@ -388,7 +405,7 @@ O ViroReact é obtido pelo npm e configurado como plugin do Expo em `app.json`. 
 
 ### Pré-requisitos
 
-- Windows 10/11 64-bit (ou Linux/macOS com o SDK Android configurado);
+- Windows 10 ou 11 (ou Linux/macOS com o SDK Android configurado);
 - **Node.js 20 LTS ou 22 LTS** — o projeto exige `>=20 <23`;
 - Android Studio com Android SDK e Platform Tools (`adb` no PATH);
 - Git;
@@ -417,7 +434,7 @@ O script verifica `node`, `npm` e `adb`, instala as dependências, roda a valida
 
 ---
 
-## 16. Como Executar o Projeto
+## 16. Como Executar
 
 ```bash
 git clone https://github.com/1Lucasi/metavision.git
@@ -459,45 +476,63 @@ A aplicação web é servida em `http://localhost:3016`.
 
 ## 17. Como Utilizar a Aplicação
 
-### 17.1 Posicionar o modelo
-
-Ao abrir o aplicativo, autorize o acesso à câmera. Mova o celular lentamente apontando para uma mesa, bancada ou piso com textura visível. Os planos detectados aparecem destacados na tela, junto com a instrução de posicionamento.
+1. Abra o aplicativo no smartphone Android.
+2. Autorize o acesso à câmera quando solicitado.
+3. Mova o celular lentamente apontando para uma mesa, bancada ou piso com textura visível.
+4. Aguarde os planos detectados aparecerem destacados na tela.
+5. Toque no plano escolhido — o modelo anatômico aparece no ponto tocado, com cerca de 31 cm de altura.
+6. Caminhe ao redor da mesa para observar o modelo de diferentes ângulos; ele permanece ancorado no mesmo ponto real.
+7. Use os botões ↺ e ↻ para girar em passos de 30°, o gesto de pinch para ajustar o tamanho e o arraste para reposicionar.
+8. Toque em um órgão para abri-lo: o restante do corpo desaparece, a estrutura vai ao centro, é ampliada e sua descrição é exibida.
+9. Para órgãos encobertos (coração, rins), abra o **menu** no canto superior esquerdo e escolha o grupo desejado.
+10. Com um órgão aberto, toque em uma de suas partes para isolar apenas ela (por exemplo, o átrio direito dentro do coração).
+11. Toque no título da descrição para recolher o painel e liberar a vista da cena.
+12. Use **Voltar** para subir um nível (parte → órgão → corpo) e **Reset** para restaurar a cena ao estado inicial.
 
 ![Detecção do plano horizontal](docs/images/01-deteccao-plano.jpg)
 
-Toque no plano onde deseja colocar o modelo. O corpo aparece imediatamente no ponto tocado, em aproximadamente 31 cm de altura, e permanece ancorado ali.
+---
 
-![Modelo posicionado sobre a mesa](docs/images/02-corpo-posicionado.jpg)
+## 18. Fluxo de Funcionamento
 
-### 17.2 Observar de vários ângulos
-
-Caminhe ao redor da mesa: o modelo permanece fixo no espaço real, permitindo observar as relações entre os órgãos de qualquer ponto de vista. Os botões ↺ e ↻ giram o modelo em passos de 30°, e o gesto de pinch ajusta o tamanho. Arrastar com o dedo reposiciona o modelo sobre a superfície.
-
-| Vista lateral | Vista posterior |
-|---|---|
-| ![Modelo visto de outro ângulo](docs/images/03-corpo-outro-angulo.jpg) | ![Modelo rotacionado](docs/images/04-corpo-rotacionado.jpg) |
-
-### 17.3 Selecionar e isolar um órgão
-
-Toque diretamente em um órgão para abri-lo. O restante do corpo desaparece, a estrutura escolhida vai ao centro e é ampliada, e o painel inferior exibe sua **localização**, **função** e **detalhe anatômico**.
-
-![Coração isolado com a descrição](docs/images/05-coracao-isolado.jpg)
-
-Aproxime-se para examinar a estrutura em detalhe:
-
-![Coração ampliado](docs/images/06-coracao-ampliado.jpg)
-
-Órgãos encobertos — como o coração, atrás dos pulmões, ou os rins, atrás das alças intestinais — são alcançados pelo **menu** no canto superior esquerdo, que lista todos os grupos e suas partes.
-
-| Pulmão direito | Intestino delgado | Rins |
-|---|---|---|
-| ![Pulmão direito isolado](docs/images/07-pulmao-direito.jpg) | ![Intestino delgado isolado](docs/images/08-intestino-delgado.jpg) | ![Rins isolados](docs/images/09-rins.jpg) |
-
-Com um órgão aberto, tocar numa de suas partes isola apenas aquela parte — por exemplo, o átrio direito dentro do coração. O botão **Voltar** sobe um nível por vez (parte → órgão → corpo inteiro) e o botão **Reset** restaura a cena ao estado inicial. Tocar no título da descrição recolhe o painel e libera a vista.
+```mermaid
+flowchart TD
+    A[Início] --> B[Abrir aplicativo]
+    B --> C[Autorizar câmera]
+    C --> D[Iniciar sessão ARCore]
+    D --> E[Detectar planos horizontais]
+    E --> F{Plano encontrado?}
+    F -- Não --> E
+    F -- Sim --> G[Destacar planos e aguardar toque]
+    G --> H[Usuário toca no plano]
+    H --> I[Instanciar os 23 órgãos ancorados]
+    I --> J{Ação do usuário}
+    J -- Tocar em órgão --> K[Abrir grupo]
+    J -- Abrir menu --> K
+    J -- Gestos --> L[Arrastar / escalar]
+    J -- Botões --> M[Girar / Voltar / Reset]
+    K --> N[Enquadrar e ampliar a estrutura]
+    N --> O[Exibir localização, função e detalhe]
+    O --> P{Isolar uma parte?}
+    P -- Sim --> N
+    P -- Não --> J
+    L --> J
+    M --> J
+```
 
 ---
 
-## 18. Fluxo de Navegação
+## 19. Caso de Uso
+
+![Diagrama de caso de uso](docs/diagrams/caso-de-uso.png)
+
+**Atores:** estudante da área da saúde, docente de anatomia e pesquisador da equipe.
+
+**Casos de uso principais:** detectar a superfície e posicionar o corpo; visualizar o modelo em RA; mover, escalar e girar; selecionar órgão por toque ou pelo menu; isolar parte de um órgão; consultar a descrição; voltar um nível e reiniciar a cena. Os casos de avaliação (atividade de identificação, questionário SUS e coleta de dados) compõem a etapa experimental do projeto.
+
+---
+
+## 20. Fluxo de Navegação
 
 ```text
 Abertura do aplicativo
@@ -521,17 +556,43 @@ PARTE ISOLADA (ex: Átrio direito)      │
 
 ---
 
-## 19. Caso de Uso
+## 21. Interface
 
-![Diagrama de caso de uso](docs/diagrams/caso-de-uso.png)
+Todas as capturas foram obtidas do aplicativo em execução em um Android físico e estão armazenadas em `docs/images/`.
 
-**Atores:** estudante da área da saúde, docente de anatomia e pesquisador da equipe.
+### 21.1 Detecção e posicionamento
 
-**Casos de uso principais:** detectar a superfície e posicionar o corpo; visualizar o modelo em RA; mover, escalar e girar; selecionar órgão por toque ou pelo menu; isolar parte de um órgão; consultar a descrição; voltar um nível e reiniciar a cena. Os casos de avaliação (atividade de identificação, questionário SUS e coleta de dados) compõem a etapa experimental do projeto.
+![Detecção do plano horizontal](docs/images/01-deteccao-plano.jpg)
+
+**Tela:** detecção de superfície. **Finalidade:** orientar o usuário a encontrar e escolher o plano onde o modelo será colocado. **Elementos:** imagem da câmera ao vivo, plano horizontal destacado em azul e card com a instrução de posicionamento. **Ação do usuário:** mover o celular até o plano aparecer e tocar sobre ele.
+
+![Modelo posicionado sobre a mesa](docs/images/02-corpo-posicionado.jpg)
+
+**Tela:** corpo posicionado. **Finalidade:** apresentar o modelo anatômico completo ancorado na superfície real. **Elementos:** 23 órgãos encaixados, botão de menu no topo e HUD inferior com o estado `Toque num órgão` e os botões de giro, voltar e reset. **Ação do usuário:** observar, circular ao redor ou tocar em um órgão.
+
+### 21.2 Observação de diferentes ângulos
+
+| ![Modelo visto de outro ângulo](docs/images/03-corpo-outro-angulo.jpg) | ![Modelo rotacionado](docs/images/04-corpo-rotacionado.jpg) |
+|---|---|
+| **Tela:** vista posterior. **Finalidade:** demonstrar a estabilidade espacial do modelo. **Elementos:** modelo visto de trás, com os rins visíveis. **Ação:** o usuário caminha ao redor da mesa. | **Tela:** modelo rotacionado. **Finalidade:** demonstrar o giro por botão. **Elementos:** modelo em nova orientação, HUD inalterado. **Ação:** o usuário toca em ↺ ou ↻. |
+
+### 21.3 Isolamento e descrição dos órgãos
+
+![Coração isolado com a descrição](docs/images/05-coracao-isolado.jpg)
+
+**Tela:** órgão isolado. **Finalidade:** permitir examinar uma estrutura separadamente e ler seu conteúdo anatômico. **Elementos:** coração centralizado e ampliado, painel com localização, função e detalhe anatômico, botões Voltar e Reset ativos. **Ação do usuário:** tocar no órgão na cena ou escolhê-lo pelo menu.
+
+![Coração ampliado](docs/images/06-coracao-ampliado.jpg)
+
+**Tela:** órgão ampliado. **Finalidade:** evidenciar o enquadramento automático, que leva a estrutura ao centro do corpo e amplia até 3×. **Elementos:** coração em detalhe sobre a cena real. **Ação do usuário:** aproximar o celular ou usar o gesto de pinch.
+
+| ![Pulmão direito isolado](docs/images/07-pulmao-direito.jpg) | ![Intestino delgado isolado](docs/images/08-intestino-delgado.jpg) | ![Rins isolados](docs/images/09-rins.jpg) |
+|---|---|---|
+| **Tela:** pulmão direito. **Elementos:** os três lobos e a descrição do grupo. **Ação:** tocar no pulmão ou selecioná-lo no menu. | **Tela:** intestino delgado. **Elementos:** duodeno e jejuno-íleo com a descrição. **Ação:** tocar na estrutura na cena. | **Tela:** rins. **Finalidade:** demonstrar o acesso a órgãos encobertos. **Elementos:** os dois rins e a descrição. **Ação:** selecionar pelo menu. |
 
 ---
 
-## 20. Testes Técnicos
+## 22. Testes Técnicos
 
 | Teste | Procedimento | Resultado esperado | Resultado obtido | Status |
 |---|---|---|---|---|
@@ -558,36 +619,16 @@ A usabilidade será avaliada pela **System Usability Scale (SUS)**: 10 afirmaç�
 
 ---
 
-## 21. Dispositivos Testados
+## 23. Dispositivos Testados
 
-| Dispositivo | Sistema | Suporte ARCore | Resultado |
+| Dispositivo | Sistema | Versão | Resultado |
 |---|---|---|---|
 | Samsung S10e | Android 12 One UI 4.1 | Compatível | Aplicativo executou com detecção de planos e interação completas |
-
 Os testes registrados neste documento foram realizados em 29 e 31 de outubro de 2026. Somente aparelhos efetivamente testados estão listados.
 
 ---
 
-## 22. Evidências de Funcionamento
-
-Todas as capturas da seção 17 foram obtidas diretamente do aplicativo em execução em um Android físico, com o modelo anatômico ancorado sobre uma mesa real. Os arquivos estão em `docs/images/`.
-
-| Arquivo | Evidência |
-|---|---|
-| `01-deteccao-plano.jpg` | Plano horizontal detectado e destacado, com a instrução de posicionamento |
-| `02-corpo-posicionado.jpg` | Modelo completo ancorado sobre a mesa |
-| `03-corpo-outro-angulo.jpg` | Mesmo modelo observado de outro ponto de vista |
-| `04-corpo-rotacionado.jpg` | Modelo girado pelos botões do HUD |
-| `05-coracao-isolado.jpg` | Coração isolado, enquadrado e com a descrição completa |
-| `06-coracao-ampliado.jpg` | Coração ampliado, demonstrando o zoom automático |
-| `07-pulmao-direito.jpg` | Pulmão direito isolado com os três lobos |
-| `08-intestino-delgado.jpg` | Intestino delgado isolado com a descrição |
-| `09-rins.jpg` | Rins isolados — estrutura encoberta, alcançada pelo menu |
-
-
----
-
-## 23. Limitações Conhecidas
+## 24. Limitações Conhecidas
 
 - O aplicativo depende de **Android compatível com ARCore**; não há versão para iOS testada, embora o projeto esteja configurado para ambas as plataformas.
 - A detecção de planos exige **superfície horizontal com textura visível** e iluminação adequada; superfícies lisas, reflexivas ou muito escuras dificultam ou impedem o reconhecimento.
@@ -603,53 +644,43 @@ Todas as capturas da seção 17 foram obtidas diretamente do aplicativo em execu
 
 ---
 
-## 24. Problemas Encontrados e Soluções
+## 25. Evidências de Funcionamento
 
-### Problema 1 — Encaminhamento dos anchors ao seletor de planos
+Todas as capturas da seção 21 foram obtidas diretamente do aplicativo em execução em um Android físico, com o modelo anatômico ancorado sobre uma mesa real.
 
-**Problema:** os planos eram detectados pelo ARCore, mas o `ViroARPlaneSelector` não os apresentava, impedindo o posicionamento do modelo.
-**Causa:** a partir do ViroReact 2.53, o `ViroARPlaneSelector` deixou de gerenciar sozinho a detecção; os eventos de anchor da `ViroARScene` precisam ser encaminhados explicitamente.
-**Solução:** encaminhar `onAnchorFound`, `onAnchorUpdated` e `onAnchorRemoved` ao seletor por uma `ref`, em `src/ar/SpatialScene.tsx`.
+| Arquivo | Evidência |
+|---|---|
+| `docs/images/01-deteccao-plano.jpg` | Plano horizontal detectado e destacado, com a instrução de posicionamento |
+| `docs/images/02-corpo-posicionado.jpg` | Modelo completo ancorado sobre a mesa |
+| `docs/images/03-corpo-outro-angulo.jpg` | Mesmo modelo observado de outro ponto de vista |
+| `docs/images/04-corpo-rotacionado.jpg` | Modelo girado pelos botões do HUD |
+| `docs/images/05-coracao-isolado.jpg` | Coração isolado, enquadrado e com a descrição completa |
+| `docs/images/06-coracao-ampliado.jpg` | Coração ampliado, demonstrando o zoom automático |
+| `docs/images/07-pulmao-direito.jpg` | Pulmão direito isolado com os três lobos |
+| `docs/images/08-intestino-delgado.jpg` | Intestino delgado isolado com a descrição |
+| `docs/images/09-rins.jpg` | Rins isolados — estrutura encoberta, alcançada pelo menu |
 
-### Problema 2 — Modelo "sumindo" ao tocar na cena
-
-**Problema:** depois de posicionado, um toque que errasse o órgão fazia o modelo saltar para outro lugar, parecendo ter desaparecido.
-**Causa:** os planos detectados continuam tocáveis mesmo após ficarem invisíveis; o toque selecionava outro plano e o conteúdo era reposicionado nele.
-**Solução:** desativar a seleção de plano assim que o corpo é posicionado, com `disableClickSelection={corpoNaMesa}`.
-
-### Problema 3 — Perda do plano escolhido durante a sessão
-
-**Problema:** o modelo era removido da cena sem ação do usuário.
-**Causa:** o ARCore ocasionalmente funde planos próximos e remove o anchor originalmente escolhido; o seletor então retira o conteúdo da cena.
-**Solução:** guardar o `anchorId` do plano selecionado e, em `onPlaneRemoved`, liberar a seleção devolvendo o aplicativo à etapa de escolha de superfície.
-
-### Problema 4 — Órgãos encobertos inalcançáveis pelo toque
-
-**Problema:** coração e rins não podiam ser selecionados, por estarem atrás dos pulmões e das alças intestinais.
-**Causa:** a seleção por toque depende da malha estar visível ao raio de teste.
-**Solução:** adicionar um menu lateral que lista todos os grupos e suas partes, permitindo abrir qualquer estrutura independentemente de estar encoberta.
-
-### Problema 5 — Gesto de rotação não registrado
-
-**Problema:** o gesto de girar com dois dedos quase nunca funcionava sobre o órgão.
-**Causa:** o ViroReact avalia o ponto médio entre os dedos, que frequentemente cai fora da malha.
-**Solução:** implementar o giro como botões de ±30° no HUD, agindo sobre o estado `rotacaoY`, e manter o gesto apenas como alternativa.
-
-### Problema 6 — Modelo único impedia a visibilidade individual
-
-**Problema:** com o `conjunto.glb` carregado como um único objeto, não era possível esconder ou isolar órgãos separadamente.
-**Causa:** o `Viro3DObject` controla visibilidade por objeto, não por mesh interna.
-**Solução:** criar `scripts/split.mjs`, que divide o GLB em um arquivo por órgão preservando a posição original dos vértices. Como nenhum nó tem transformação própria, os 23 arquivos são posicionados em `[0, 0, 0]` e se reencaixam exatamente.
-
-### Problema 7 — Modelos `.glb` não embarcados pelo bundler
-
-**Problema:** os arquivos dos órgãos não eram incluídos no pacote do aplicativo.
-**Causa:** o Metro não reconhece `.glb` como asset por padrão, e só embute `require()` com caminho literal.
-**Solução:** adicionar `glb` a `resolver.assetExts` em `metro.config.js` e declarar um `require()` literal por órgão em `src/ar/modelos.ts`.
 
 ---
 
-## 25. Cronograma Técnico
+## 26. Repositórios e Recursos
+
+| Recurso | Link |
+|---|---|
+| Código-fonte | https://github.com/1Lucasi/metavision |
+| Modelo de documentação da disciplina | https://github.com/dr-ohata/upx-modelo |
+| Referência de interação | https://github.com/ashemag/human-atlas |
+| Modelos anatômicos — NIH 3D | https://3d.nih.gov |
+| Template Z-Anatomy | https://z-anatomy.com |
+| ViroReact | https://github.com/ReactVision/viro |
+| Dispositivos compatíveis com ARCore | https://developers.google.com/ar/devices |
+| Trello (gestão do projeto) | https://trello.com/b/bcPnYlUg/metavision |
+| Vídeo pitch parcial I | https://youtu.be/D23BhZz_LeI |
+| Formulário | https://docs.google.com/forms/d/e/1FAIpQLScVlfK32sfD3mPcIXHUkfAjdtzUNHGRIMVCeE6w3cJpg2aEaQ/viewform |
+
+---
+
+## 27. Cronograma Técnico
 
 | Atividade | Responsável | Status |
 |---|---|---|
@@ -678,9 +709,9 @@ Todas as capturas da seção 17 foram obtidas diretamente do aplicativo em execu
 
 ---
 
-## 26. Controle de Versão
+## 28. Controle de Versão
 
-O desenvolvimento é organizado em branches por frente de trabalho, integradas à `main` por pull request. Exemplos de branches utilizadas: `descricao-orgaos`, `mobile-viro`, `mobile-navegacao-orgaos` e `padronizacao-ohata`.
+O desenvolvimento é organizado em branches por frente de trabalho, integradas à `main` por pull request. Branches utilizadas: `descricao-orgaos`, `imagens-diagramas`, `mobile-viro`, `mobile-navegacao-orgaos` e `padronizacao-ohata`.
 
 Exemplos de mensagens de commit do projeto:
 
@@ -689,29 +720,58 @@ feat: adiciona base React Native (WL02) em mobile/
 feat: divide conjunto.glb em 23 modelos para o app
 feat: mostra o coração na cena AR com botões de giro
 feat: adiciona navegação por órgãos na cena AR
-docs: padroniza README conforme modelo da disciplina
+docs: atualiza README para o app mobile e adiciona imagens e diagramas
 ```
 
 ---
 
-## 27. Repositórios e Recursos
+## 29. Problemas Encontrados e Soluções
 
-| Recurso | Link |
-|---|---|
-| Código-fonte | https://github.com/1Lucasi/metavision |
-| Modelo de documentação da disciplina | https://github.com/dr-ohata/upx-modelo |
-| Referência de interação | https://github.com/ashemag/human-atlas |
-| Modelos anatômicos — NIH 3D | https://3d.nih.gov |
-| Template Z-Anatomy | https://z-anatomy.com |
-| ViroReact | https://github.com/ReactVision/viro |
-| Dispositivos compatíveis com ARCore | https://developers.google.com/ar/devices |
-| Trello (gestão do projeto) | https://trello.com/b/bcPnYlUg/metavision |
-| Vídeo pitch parcial I | https://youtu.be/D23BhZz_LeI |
-| Formulário | https://docs.google.com/forms/d/e/1FAIpQLScVlfK32sfD3mPcIXHUkfAjdtzUNHGRIMVCeE6w3cJpg2aEaQ/viewform |
+### Problema 1 — Encaminhamento dos anchors ao seletor de planos
+
+**Problema:** os planos eram detectados pelo ARCore, mas o `ViroARPlaneSelector` não os apresentava, impedindo o posicionamento do modelo.
+**Causa:** a partir do ViroReact 2.53, o `ViroARPlaneSelector` deixou de gerenciar sozinho a detecção; os eventos de anchor da `ViroARScene` precisam ser encaminhados explicitamente.
+**Solução:** encaminhar `onAnchorFound`, `onAnchorUpdated` e `onAnchorRemoved` ao seletor por uma `ref`, em `src/ar/SpatialScene.tsx`.
+
+### Problema 2 — Modelo "sumindo" ao tocar na cena
+
+**Problema:** depois de posicionado, um toque que errasse o órgão fazia o modelo saltar para outro lugar, parecendo ter desaparecido.
+**Causa:** os planos detectados continuam tocáveis mesmo após ficarem invisíveis; o toque selecionava outro plano e o conteúdo era reposicionado nele.
+**Solução:** desativar a seleção de plano assim que o corpo é posicionado, com `disableClickSelection={corpoNaMesa}`.
+
+### Problema 3 — Perda do plano escolhido durante a sessão
+
+**Problema:** o modelo era removido da cena sem ação do usuário.
+**Causa:** o ARCore ocasionalmente funde planos próximos e remove o anchor originalmente escolhido; o seletor então retira o conteúdo da cena.
+**Solução:** guardar o `anchorId` do plano selecionado e, em `onPlaneRemoved`, liberar a seleção devolvendo o aplicativo à etapa de escolha de superfície.
+
+### Problema 4 — Órgãos encobertos inalcançáveis pelo toque
+
+**Problema:** coração e rins não podiam ser selecionados, por estarem atrás dos pulmões e das alças intestinais.
+**Causa:** a seleção por toque depende de a malha estar visível ao raio de teste.
+**Solução:** adicionar um menu lateral que lista todos os grupos e suas partes, permitindo abrir qualquer estrutura independentemente de estar encoberta.
+
+### Problema 5 — Gesto de rotação não registrado
+
+**Problema:** o gesto de girar com dois dedos quase nunca funcionava sobre o órgão.
+**Causa:** o ViroReact avalia o ponto médio entre os dedos, que frequentemente cai fora da malha.
+**Solução:** implementar o giro como botões de ±30° no HUD, agindo sobre o estado `rotacaoY`, e manter o gesto apenas como alternativa.
+
+### Problema 6 — Modelo único impedia a visibilidade individual
+
+**Problema:** com o `conjunto.glb` carregado como um único objeto, não era possível esconder ou isolar órgãos separadamente.
+**Causa:** o `Viro3DObject` controla visibilidade por objeto, não por mesh interna.
+**Solução:** criar `scripts/split.mjs`, que divide o GLB em um arquivo por órgão preservando a posição original dos vértices. Como nenhum nó tem transformação própria, os 23 arquivos são posicionados em `[0, 0, 0]` e se reencaixam exatamente.
+
+### Problema 7 — Modelos `.glb` não embarcados pelo bundler
+
+**Problema:** os arquivos dos órgãos não eram incluídos no pacote do aplicativo.
+**Causa:** o Metro não reconhece `.glb` como asset por padrão, e só embute `require()` com caminho literal.
+**Solução:** adicionar `glb` a `resolver.assetExts` em `metro.config.js` e declarar um `require()` literal por órgão em `src/ar/modelos.ts`.
 
 ---
 
-## 28. Melhorias Futuras
+## 30. Melhorias Futuras
 
 - Incorporar as estruturas cervicais previstas no escopo: traqueia, laringe, faringe, tireoide e esôfago.
 - Adicionar as camadas de pele, caixa torácica e vasos ao modelo.
@@ -723,9 +783,9 @@ docs: padroniza README conforme modelo da disciplina
 
 ---
 
-## 29. Custos e Recursos
+## 31. Custos e Recursos
 
-| Recurso | Tipo | Custo |
+| Recurso | Tipo | Custo/Condição |
 |---|---|---|
 | React Native, Expo, ViroReact | Software | Gratuito (código aberto) |
 | Android Studio e SDK | Software | Gratuito |
@@ -738,52 +798,49 @@ O custo direto do projeto é nulo; o investimento é de hora-trabalho da equipe.
 
 ---
 
-## 30. Créditos dos Modelos 3D
+## 32. Licença
 
-Os modelos anatômicos derivam dos acervos abertos **Z-Anatomy** e **NIH 3D**, adaptados no Blender pela equipe. As licenças Creative Commons de cada modelo utilizado estão registradas em `docs/documents/`, conforme exigido pelas fontes.
+Projeto acadêmico desenvolvido para fins educacionais na disciplina de UPX — Realidade Aumentada do Centro Universitário Facens.
 
----
+### Créditos dos modelos 3D
 
-## 31. Licença
-
-Projeto acadêmico desenvolvido para fins educacionais na disciplina de UPX — Realidade Aumentada do Centro Universitário Facens. Os modelos 3D mantêm as licenças de seus acervos de origem.
+Os modelos anatômicos derivam dos acervos abertos **Z-Anatomy** e **NIH 3D**, adaptados no Blender pela equipe. Cada acervo exige a citação da fonte e mantém sua própria licença Creative Commons; o registro do nome, da fonte e da licença de cada modelo utilizado está em `docs/documents/`.
 
 ---
 
-## 32. Autores
+## 33. Autores
 
-- **Carolina Leamari** — Aquisição e preparação dos assets 3D
-- **Eduarda Gomes Abreu e Almeida** — Interação e navegação
-- **Fernanda Theodoro Casali** — Documentação técnica, pesquisa e artigo
-- **Gabriel Baldi Gomes dos Santos** — Interação por toque e validação em RA
-- **Gabriel Massayuki Teixeira Ogino** — Interação e enquadramento
-- **Higor Bertinotti Aranda** — Desenvolvimento 3D e visualização
-- **Lucas Proença Gonçalves do Santos** — Desenvolvimento 3D e integração ViroReact
+- **Carolina Leamari** — aquisição e preparação dos assets 3D
+- **Eduarda Gomes Abreu e Almeida** — interação e navegação
+- **Fernanda Theodoro Casali** — documentação técnica, pesquisa e artigo
+- **Gabriel Baldi Gomes dos Santos** — interação por toque e validação em RA
+- **Gabriel Massayuki Teixeira Ogino** — interação e enquadramento
+- **Higor Bertinotti Aranda** — desenvolvimento 3D e visualização
+- **Lucas Proença Gonçalves do Santos** — desenvolvimento 3D e integração ViroReact
 
 **Orientação:** Prof. Daniel Ohata
 **Instituição:** Centro Universitário Facens — Sorocaba/SP
-**Disciplina:** UPX — Realidade Aumentada · 2026.2
+**Disciplina:** UPX — Realidade Aumentada
+**Semestre:** 2026.2
 
 ---
 
 ## Checklist de Entrega
 
-- [x] Código-fonte atualizado no repositório
-- [x] Equipe identificada com RA e responsabilidades
-- [x] Versões das tecnologias informadas
-- [x] Arquitetura apresentada em diagrama
-- [x] Funcionamento da RA explicado tecnicamente
+- [x] Código-fonte atualizado
+- [x] README completamente preenchido
+- [x] Versões das tecnologias registradas
+- [x] Arquitetura apresentada
+- [x] Funcionamento da RA explicado
 - [x] Estrutura de pastas documentada
-- [x] Principais componentes descritos
-- [x] Procedimento de configuração do ambiente
-- [x] Procedimento de execução
-- [x] Procedimento de utilização
-- [x] Imagens reais da aplicação
-- [x] Evidências de funcionamento
-- [x] Testes técnicos registrados
+- [x] Scripts principais descritos
+- [x] Procedimento de instalação testado
+- [x] Procedimento de execução testado
+- [x] Screenshots reais adicionados
+- [x] Testes registrados
 - [x] Limitações conhecidas documentadas
-- [x] Problemas e soluções registrados
-- [x] Histórico de commits representando a evolução
-- [ ] Dispositivo de teste identificado (seção 9 e 21)
-- [ ] Link do vídeo de demonstração
-- [ ] Link do formulário SUS
+- [x] Evidência de funcionamento adicionada
+- [x] Commits representam a evolução do projeto
+- [ ] Dispositivos testados informados (seções 9 e 23)
+- [ ] Link do vídeo de demonstração (seções 25 e 26)
+- [ ] Link do formulário SUS (seção 26)
