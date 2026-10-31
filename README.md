@@ -1,12 +1,12 @@
-# MetaVision — Anatomia Torácica e Cervical em RA
+# MetaVision — Anatomia em Realidade Aumentada
 
-> **Projeto UPX — Realidade Aumentada**
-> Aplicação web de Realidade Aumentada com órgãos torácicos e cervicais interativos e clicáveis para apoiar a compreensão espacial da anatomia por estudantes da área da saúde.
+> **Projeto UPX — Realidade Aumentada · Facens · 2026.2**
+> Aplicativo Android de Realidade Aumentada que posiciona um modelo anatômico 3D sobre uma superfície real e permite explorar 23 órgãos interativos, com descrição individual de cada estrutura.
 
-![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
-![Plataforma](https://img.shields.io/badge/plataforma-Web-green)
-![Tecnologia](https://img.shields.io/badge/RA-React%20Three%20Fiber-blue)
-![Node](https://img.shields.io/badge/Node-18%2B-black)
+![Status](https://img.shields.io/badge/status-protótipo%20funcional-brightgreen)
+![Plataforma](https://img.shields.io/badge/plataforma-Android-green)
+![RA](https://img.shields.io/badge/RA-ViroReact%20%2B%20ARCore-orange)
+![Node](https://img.shields.io/badge/Node-20%20-%2022-black)
 ![ODS](https://img.shields.io/badge/ODS-4%20%7C%203-informational)
 
 ---
@@ -15,46 +15,53 @@
 
 | Item | Informação |
 |---|---|
-| **Projeto** | MetaVision — Anatomia Torácica e Cervical em RA |
+| **Projeto** | MetaVision — Anatomia em Realidade Aumentada |
 | **Equipe** | MetaVision |
-| **Curso** | A preencher |
+| **Curso** | Engenharia de Computação |
 | **Disciplina** | UPX — Realidade Aumentada |
 | **Professor** | Daniel Ohata |
-| **Instituição** | Facens |
+| **Instituição** | Centro Universitário Facens — Sorocaba/SP |
 | **Semestre** | 2026.2 |
 
 ### Integrantes
 
-| Nome | RA | Responsabilidade |
+| Nome | RA | Responsabilidade técnica |
 |---|---|---|
-| Eduarda Gomes Abreu e Almeida | 236021 | Interação |
-| Carolina Leamari | 235249 | Aquisição/preparação de assets |
-| Fernanda Theodoro Casali | 235329 | Documentação e pesquisa |
-| Gabriel Massayuki Teixeira Ogino | 236044 | Interação |
-| Lucas Proença Gonçalves do Santos | 235411 | Front / Visualização 3D |
-| Higor Bertinotti Aranda | 235332 | Front / Visualização 3D |
-| Gabriel Baldi Gomes dos Santos | 235452 | A definir |
+| Carolina Leamari | 235249 | Aquisição e preparação dos assets 3D (Blender, Z-Anatomy/NIH 3D, exportação GLB) |
+| Eduarda Gomes Abreu e Almeida | 236021 | Interação — seleção de órgãos, isolamento e navegação |
+| Fernanda Theodoro Casali | 235329 | Documentação técnica, pesquisa e artigo científico |
+| Gabriel Baldi Gomes dos Santos | 235452 | Interação por toque e validação da renderização em RA |
+| Gabriel Massayuki Teixeira Ogino | 236044 | Interação — enquadramento de câmera e transições |
+| Higor Bertinotti Aranda | 235332 | Desenvolvimento 3D e visualização |
+| Lucas Proença Gonçalves do Santos | 235411 | Desenvolvimento 3D, pipeline de modelos e integração ViroReact |
 
 ---
 
 ## 2. Visão Geral
 
-O **MetaVision** é uma aplicação web de Realidade Aumentada que sobrepõe modelos 3D interativos dos órgãos das regiões **torácica** e **cervical** ao ambiente real, permitindo ao estudante girar, aproximar e tocar cada órgão para acessar explicações individualizadas.
+O **MetaVision** é um aplicativo Android de Realidade Aumentada voltado ao ensino de anatomia. Usando a câmera do celular, o aplicativo detecta uma superfície horizontal real — uma mesa, uma bancada ou o piso — e posiciona sobre ela um modelo anatômico tridimensional em escala. O estudante pode então caminhar ao redor do modelo, girá-lo, aproximá-lo e **tocar diretamente em cada órgão** para isolá-lo e ler sua descrição.
 
-Órgãos cobertos no escopo do projeto: **esôfago, estômago, coração, pulmões, traqueia, laringe, faringe e tireoide**.
+O problema que motiva o projeto é a dificuldade que estudantes da área da saúde têm em compreender a **disposição espacial** dos órgãos quando o estudo depende apenas de imagens bidimensionais de livros e atlas impressos. A imagem estática não transmite profundidade, não permite mudar o ponto de vista e não deixa o estudante separar uma estrutura do conjunto para examiná-la.
 
-A proposta se alinha ao **ODS 4 — Educação de Qualidade** e, indiretamente, ao **ODS 3 — Saúde e Bem-Estar**, ao oferecer um recurso didático complementar para o ensino de anatomia.
+A Realidade Aumentada participa da solução como o meio pelo qual o modelo deixa de ser uma figura na tela e passa a ocupar o espaço físico da sala. O ARCore reconhece o ambiente e fornece o rastreamento, de modo que o modelo permanece ancorado no mesmo ponto da mesa enquanto o estudante se movimenta — é essa estabilidade espacial que permite observar as relações entre os órgãos de diferentes ângulos, exatamente o que a representação 2D não oferece.
 
-<!-- IMAGEM: visão geral do projeto -->
-![Visão geral do projeto](docs/images/visao-geral.png)
+A proposta se alinha ao **ODS 4 — Educação de Qualidade** e, indiretamente, ao **ODS 3 — Saúde e Bem-Estar**.
+
+![Modelo anatômico posicionado sobre a mesa em RA](docs/images/02-corpo-posicionado.jpg)
 
 ---
 
 ## 3. Problema
 
-Estudantes da área da saúde têm dificuldade em compreender a disposição espacial e as relações entre os órgãos do tórax e do pescoço quando o estudo depende apenas de representações bidimensionais de livros e atlas impressos. A imagem estática não transmite profundidade nem permite manipular o modelo.
+**Contexto.** O estudo de anatomia humana nos cursos da área da saúde depende fortemente de atlas impressos e de imagens bidimensionais. O acesso a laboratórios de anatomia com peças reais é limitado por custo, disponibilidade e questões éticas e sanitárias.
 
-O MetaVision propõe o uso de Realidade Aumentada e visualização 3D interativa como ferramenta de apoio ao ensino, permitindo que o estudante manipule o modelo anatômico em tempo real, isole estruturas específicas e compreenda a disposição espacial dos órgãos.
+**Situação atual.** O estudante aprende a localização dos órgãos a partir de cortes e vistas fixas, escolhidas pelo autor do material. Ele não controla o ponto de vista nem consegue remover uma estrutura para ver o que está atrás dela.
+
+**Dificuldade encontrada.** Compreender a **disposição espacial** e as **relações de vizinhança** entre os órgãos — o que está à frente, atrás, acima ou lateralmente em relação a quê. Estruturas encobertas, como o coração atrás dos pulmões ou os rins atrás das alças intestinais, são particularmente difíceis de situar a partir de uma figura plana.
+
+**Público afetado.** Estudantes de medicina, enfermagem, fisioterapia, biomedicina e cursos afins em fase de aprendizado de anatomia.
+
+**Impacto.** A compreensão espacial incompleta compromete a formação prática do futuro profissional de saúde, afetando a qualidade do ensino e, por extensão, a qualidade da assistência prestada.
 
 ---
 
@@ -62,32 +69,37 @@ O MetaVision propõe o uso de Realidade Aumentada e visualização 3D interativa
 
 ### 4.1 Objetivo Geral
 
-Desenvolver uma aplicação web de Realidade Aumentada que ofereça manipulação espacial e conteúdo contextual de órgãos torácicos e cervicais, com modelos 3D interativos exibidos sobre o ambiente real, apoiando o ensino de anatomia para estudantes da área da saúde.
+Desenvolver e avaliar um aplicativo móvel de Realidade Aumentada com órgãos interativos e clicáveis, capaz de apoiar a compreensão espacial da anatomia por estudantes da área da saúde.
 
 ### 4.2 Objetivos Técnicos
 
-- Configurar um projeto React com suporte a renderização 3D via React Three Fiber.
-- Carregar e renderizar modelos anatômicos em formato GLB otimizado para a web.
-- Nomear os meshes do modelo seguindo a convenção definida pela equipe.
-- Permitir alternar a visibilidade das camadas anatômicas (visível, transparente e oculto por órgão).
-- Permitir seleção individual ou agrupada de órgãos, com reenquadramento automático de câmera.
-- Permitir seleção direta no modelo 3D por clique/toque.
-- Oferecer giro em passos de 90° e controle de tamanho do modelo.
-- Habilitar a experiência de RA no navegador via WebXR / model-viewer.
-- Estruturar a aplicação em três abas: Explorar, Atividade e Avaliação.
-- Aplicar instrumento de usabilidade **SUS (System Usability Scale)** para avaliação com usuários.
-- Executar a aplicação em navegador moderno em desktop e dispositivos móveis.
+- Configurar um projeto React Native com Expo e suporte nativo a Realidade Aumentada.
+- Implementar a detecção de planos horizontais com ARCore via ViroReact.
+- Permitir que o usuário selecione a superfície real onde o modelo será posicionado.
+- Preparar os modelos anatômicos no Blender e exportá-los em formato GLB otimizado.
+- Dividir o modelo único em um arquivo GLB por órgão, viabilizando a visibilidade individual.
+- Renderizar os 23 órgãos ancorados e espacialmente estáveis sobre a superfície escolhida.
+- Implementar seleção de órgãos por toque direto na cena de RA.
+- Implementar um menu de navegação que alcance também os órgãos encobertos.
+- Implementar o isolamento de um órgão, com enquadramento e ampliação automáticos.
+- Exibir localização, função e detalhe anatômico da estrutura selecionada.
+- Implementar manipulação por gestos (arrastar e pinch) e controles de giro, voltar e reset.
+- Executar e validar a aplicação em dispositivo Android físico compatível com ARCore.
 - Documentar instalação, execução, testes e limitações.
 
 ---
 
 ## 5. Público-Alvo
 
-- Estudantes de **medicina, enfermagem, fisioterapia, biomedicina** e cursos afins em fase de aprendizado de anatomia;
-- **Docentes de anatomia**, como recurso didático complementar;
-- Demais interessados em visualização anatômica 3D.
+**Perfil.** Estudantes de graduação da área da saúde, entre o primeiro e o terceiro ano, cursando disciplinas de anatomia humana. Secundariamente, docentes de anatomia que busquem um recurso didático complementar.
 
-Materiais complementares de público-alvo, persona e jornada podem ser armazenados em `docs/documents/`.
+**Contexto de utilização.** Estudo individual ou em pequenos grupos, em sala de aula, biblioteca ou em casa. O aplicativo requer apenas uma superfície horizontal com textura visível e espaço livre ao redor para que o usuário possa circular.
+
+**Necessidades.** Compreender a posição relativa dos órgãos, identificar estruturas encobertas e associar cada estrutura à sua função.
+
+**Nível de familiaridade tecnológica.** Alto para uso de smartphones, mas sem experiência prévia pressuposta em Realidade Aumentada — por isso a tela inicial traz instrução explícita de como detectar e tocar o plano.
+
+**Limitações do público.** Depende de dispositivo Android compatível com ARCore. A lista de materiais de persona e jornada do usuário está em `docs/documents/`.
 
 ---
 
@@ -95,25 +107,26 @@ Materiais complementares de público-alvo, persona e jornada podem ser armazenad
 
 | ID | Funcionalidade | Descrição | Status |
 |---|---|---|---|
-| RF01 | Carregar modelo 3D | Carrega o GLB anatômico otimizado em cena | ✅ |
-| RF02 | Alternar camadas | Liga/desliga pele, caixa torácica, órgãos e vasos | ✅ |
-| RF03 | Selecionar órgão | Isola um órgão individual e reenquadra a câmera | ✅ |
-| RF04 | Selecionar grupo | Isola um grupo inteiro (ex: coração completo) | ✅ |
-| RF05 | Clicar no 3D | Adiciona/remove um mesh da seleção por clique | ✅ |
-| RF06 | Reenquadrar câmera | Ajusta a câmera à bounding box da seleção | ✅ |
-| RF07 | Limpar seleção | Volta à cena completa | ✅ |
-| RF08 | Camada por órgão (visível/transparente/oculto) | Cada órgão alterna entre três estados | 🚧 |
-| RF09 | Giro 90° em passos | Rotaciona o modelo em incrementos de 90° | 🚧 |
-| RF10 | Controle de tamanho | Permite escalar o modelo | 🚧 |
-| RF11 | Órgão em destaque flutuante | Cópia ampliada do órgão selecionado acima do tronco | 🚧 |
-| RF12 | Animação de câmera | Suaviza a transição com lerp / react-spring/three | 🚧 |
-| RF13 | Centralização ao clicar | Órgão clicado vai ao centro da tela | 🚧 |
-| RF14 | Botão "voltar" | Reseta a seleção e volta à visão geral | 🚧 |
-| RF15 | Aba Explorar | Visualização 3D + painel + abertura de RA | 🚧 |
-| RF16 | Aba Atividade | Quiz de toque com registro de acertos/erros | ⬜ |
-| RF17 | Aba Avaliação | Formulário SUS integrado | ⬜ |
-| RF18 | Experiência RA no navegador | Visualização sobre superfície via WebXR | 🚧 |
-| RF19 | Painel de informações | Nome, função e localização por órgão | ⬜ |
+| RF01 | Iniciar sessão de RA | Inicia a câmera e a sessão ARCore ao abrir o aplicativo | ✅ |
+| RF02 | Detectar planos horizontais | Reconhece mesas, bancadas e piso e os destaca na tela | ✅ |
+| RF03 | Selecionar superfície | O usuário toca no plano onde o modelo será posicionado | ✅ |
+| RF04 | Posicionar modelo anatômico | Instancia os 23 órgãos ancorados no ponto tocado | ✅ |
+| RF05 | Manter estabilidade espacial | O modelo permanece fixo no ponto real enquanto o usuário se move | ✅ |
+| RF06 | Selecionar órgão por toque | Tocar num órgão da cena abre o grupo correspondente | ✅ |
+| RF07 | Selecionar órgão pelo menu | Menu lateral alcança órgãos encobertos (coração, rins) | ✅ |
+| RF08 | Isolar parte de um órgão | Com o grupo aberto, tocar numa parte isola somente ela | ✅ |
+| RF09 | Enquadrar e ampliar | A estrutura isolada vai ao centro do corpo e é ampliada até 3× | ✅ |
+| RF10 | Exibir descrição do órgão | Localização, função e detalhe anatômico da estrutura | ✅ |
+| RF11 | Recolher a descrição | Tocar no título recolhe o painel e libera a vista da cena | ✅ |
+| RF12 | Girar o modelo por botão | Giro de 30° por toque, em ambos os sentidos | ✅ |
+| RF13 | Arrastar o modelo | Reposiciona o modelo sobre a superfície real (`FixedToWorld`) | ✅ |
+| RF14 | Escalar por pinch | Ajusta o tamanho do modelo entre 0,1× e 1,5× | ✅ |
+| RF15 | Voltar um nível | Parte → órgão → corpo inteiro | ✅ |
+| RF16 | Reset | Restaura rotação, escala, seleção e posição iniciais | ✅ |
+| RF17 | Recuperar plano removido | Se o ARCore remove o plano escolhido, volta à seleção de superfície | ✅ |
+| RF18 | Atividade de identificação | Quiz em que o usuário toca na estrutura solicitada | ⬜ |
+| RF19 | Questionário de usabilidade (SUS) | Formulário SUS aplicado após o uso | 🚧 |
+| RF20 | Órgãos cervicais | Traqueia, laringe, faringe, tireoide e esôfago | ⬜ |
 
 **Legenda:** ✅ Implementado · 🚧 Em desenvolvimento · ⬜ Planejado · ❌ Cancelado
 
@@ -123,86 +136,96 @@ Materiais complementares de público-alvo, persona e jornada podem ser armazenad
 
 | ID | Categoria | Requisito |
 |---|---|---|
-| RNF01 | Compatibilidade | A aplicação deverá executar em navegadores modernos com suporte a WebGL 2 |
-| RNF02 | Desempenho | A cena 3D deverá manter taxa de quadros adequada à interação em desktop e mobile |
-| RNF03 | Usabilidade | O usuário deverá conseguir identificar e isolar um órgão em poucos cliques |
-| RNF04 | Hardware | O dispositivo deverá possuir GPU compatível com WebGL 2 e, para RA, suporte a WebXR |
-| RNF05 | Documentação | O repositório deverá permitir que outra pessoa compreenda como configurar e executar o projeto |
-| RNF06 | Modelo | O modelo GLB deverá ser otimizado para carregamento em rede |
-| RNF07 | Avaliação | A aplicação deverá disponibilizar o formulário SUS na aba Avaliação |
+| RNF01 | Compatibilidade | O aplicativo deverá executar em Android compatível com ARCore (Google Play Services for AR) |
+| RNF02 | Hardware | O dispositivo deverá possuir câmera traseira e sensores de movimento utilizados pelo ARCore |
+| RNF03 | Desempenho | Os 23 modelos somados deverão ocupar no máximo cerca de 3 MB, para manter o carregamento e o uso de memória adequados ao dispositivo móvel |
+| RNF04 | Usabilidade | O usuário deverá conseguir posicionar o modelo e isolar um órgão em poucos toques, sem treinamento prévio |
+| RNF05 | Usabilidade | Órgãos encobertos deverão ser alcançáveis sem depender do toque direto na cena |
+| RNF06 | Conectividade | Após instalado, o aplicativo deverá funcionar sem conexão com a internet — os modelos são embarcados no pacote |
+| RNF07 | Ambiente | A detecção de planos exige superfície horizontal com textura visível e iluminação adequada |
+| RNF08 | Documentação | O repositório deverá permitir que outra pessoa configure, compile e execute o projeto |
 
 ---
 
-## 8. Tecnologias e Ferramentas
+## 8. Tecnologias Utilizadas
 
-### Desenvolvimento
+### Aplicativo mobile (projeto principal)
 
-| Tecnologia | Versão | Utilização |
+| Tecnologia | Versão | Utilização no projeto |
 |---|---|---|
-| React | 18.3.x | Biblioteca de interface |
-| TypeScript | 5.6.x | Tipagem estática |
-| Vite | 5.4.x | Build e dev server |
-| Three.js | 0.169.x | Renderização 3D (WebGL) |
+| React Native | 0.86.3 | Framework da aplicação móvel |
+| Expo | 57.0.23 | Toolchain, build nativo e configuração via plugins |
+| React | 19.2.3 | Biblioteca de interface |
+| ViroReact (`@reactvision/react-viro`) | 2.57.3 | Motor de Realidade Aumentada — cena, planos e objetos 3D |
+| ARCore | via Google Play Services for AR | Detecção de superfícies e rastreamento espacial |
+| TypeScript | 5.9.3 | Tipagem estática |
+| zustand | 5.0.16 | Gerenciamento de estado da navegação e do HUD |
+| Metro | padrão do Expo 57 | Bundler, configurado para aceitar `.glb` como asset |
+| Node.js | 20 LTS a 22 LTS | Ambiente de build (`engines: >=20 <23`) |
+| Android Studio + Platform Tools | — | SDK Android, `adb` e compilação nativa |
+
+### Preparação dos modelos 3D
+
+| Tecnologia | Versão | Utilização no projeto |
+|---|---|---|
+| Blender | 3.6 LTS | Modelagem e exportação dos órgãos (a versão 4.x é incompatível com o template Z-Anatomy) |
+| Z-Anatomy | — | Template anatômico open source usado como base |
+| NIH 3D | — | Acervo aberto do National Institutes of Health |
+| `@gltf-transform/cli` | 4.1.x | Otimização e divisão dos arquivos GLB |
+| meshoptimizer | — | Simplificação de geometria preservando estruturas pequenas |
+
+### Protótipo web (precursor, mantido no repositório)
+
+| Tecnologia | Versão | Utilização no projeto |
+|---|---|---|
+| Vite | 5.4.x | Build e servidor de desenvolvimento |
+| Three.js | 0.169.x | Renderização 3D via WebGL |
 | @react-three/fiber | 8.17.x | Integração React + Three.js |
-| @react-three/drei | 9.114.x | Helpers de cena (CameraControls, useGLTF, Center) |
-| zustand | 4.5.x | Gerenciamento de estado |
-| @gltf-transform/cli | 4.1.x | Otimização de modelo GLB |
-| meshoptimizer | — | Simplificação de geometria |
-| WebXR | — | Experiência de RA no navegador |
-| Blender | **3.6 LTS** | Modelagem/edição 3D (compatível com template Z-Anatomy) |
-| Git | 2.x | Controle de versão |
-| GitHub | — | Hospedagem e documentação |
-| Vercel | — | Deploy da aplicação |
+| @react-three/drei | 9.114.x | `CameraControls`, `useGLTF`, `Center` |
 
-### Modelos anatômicos
+### Gestão e colaboração
 
-- **Z-Anatomy** — template open source utilizado como base dos órgãos
-- **NIH 3D** — acervo aberto do National Institutes of Health
-
-### Ferramentas de gestão e colaboração
-
-- **Trello** — gestão de tarefas (quadro Metavision)
-- **Miro** — fluxo e wireframes do app
-- **Google Drive** — backup e documentos
-- **Discord** — comunicação da equipe
-- **Google Forms** — coleta de respostas do SUS
+Trello (quadro Metavision), Miro (fluxo do app), Google Drive (documentos), Discord (comunicação), GitHub (código e documentação) e Google Forms (coleta do SUS).
 
 ---
 
 ## 9. Hardware Utilizado
 
-| Equipamento | Modelo | Característica relevante | Utilização |
+| Equipamento | Modelo | Sistema | Finalidade no projeto |
 |---|---|---|---|
-| Computador | A preencher | CPU / RAM / GPU com WebGL 2 | Desenvolvimento e execução |
-| Smartphone | A preencher | Navegador moderno com WebGL 2 e WebXR | Testes de visualização e RA mobile |
+| Smartphone Android | Samsung S10e | Android 12 - One UI 4.1 | Execução e testes da aplicação em RA |
+| Notebook de desenvolvimento | Dell G15 | Windows 11 64-bit | Desenvolvimento, build nativo e preparação dos modelos 3D | 
+Notebook de desenvolvimento | Vivobook ASUS | Windows 11 64-bit | Desenvolvimento, build nativo e preparação dos modelos 3D | 
+Notebook de desenvolvimento | Nitro v15 | Windows 11 64-bit | Desenvolvimento, build nativo e preparação dos modelos 3D |
 
-> Preencher com os equipamentos efetivamente utilizados pela equipe nos testes.
+O aparelho precisa constar na lista de dispositivos compatíveis com ARCore e ter o **Google Play Services for AR** instalado.
 
 ---
 
 ## 10. Arquitetura do Sistema
 
-A arquitetura está organizada em camadas: interface (componentes React), estado global (zustand), cena 3D (React Three Fiber + Three.js), modelo anatômico (GLB otimizado) e camada de RA (WebXR).
+A arquitetura se organiza em três blocos: o **aplicativo** (interface 2D, estado global e cena de RA), a **camada de Realidade Aumentada** (ViroReact sobre ARCore, que conversa com a câmera e os sensores) e o **pipeline de assets**, executado offline para transformar o modelo do Blender nos 23 arquivos GLB embarcados no aplicativo.
 
-<!-- IMAGEM: arquitetura do sistema -->
 ![Arquitetura do sistema](docs/diagrams/arquitetura.png)
 
 ### Fluxo resumido
 
 ```text
-Usuário
+Estudante
    ↓
-Interface React (Abas Explorar / Atividade / Avaliação)
+App.tsx — HUD sobre a câmera (menu, descrição, botões)
    ↓
-Estado global (zustand)
+store.ts (zustand) — grupoAtivo, orgaosSelecionados, rotacaoY, corpoNaMesa
    ↓
-Cena 3D (React Three Fiber)
+SpatialScene.tsx — visibilidade e enquadramento dos órgãos
    ↓
-Three.js / WebGL / WebXR
+ViroReact 2.57.3
    ↓
-GPU + Câmera do dispositivo
+ARCore
    ↓
-Modelo GLB renderizado sobre o ambiente real
+Câmera e sensores do Android
+   ↓
+Modelo anatômico ancorado sobre a superfície real
 ```
 
 ---
@@ -211,31 +234,32 @@ Modelo GLB renderizado sobre o ambiente real
 
 ### 11.1 Técnica utilizada
 
-O MetaVision combina **visualização 3D interativa em WebGL** com **experiência de RA via WebXR**, permitindo tanto a inspeção do modelo em desktop quanto a sobreposição ao ambiente real em dispositivos compatíveis.
+O MetaVision usa **RA markerless com detecção de planos** (*plane detection*). Não há marcador, QR Code nem imagem de referência: o reconhecimento é feito sobre o próprio ambiente. O ARCore identifica superfícies horizontais a partir das imagens da câmera combinadas aos sensores de movimento, e devolve **anchors** — pontos de referência estáveis no espaço real. O modelo anatômico é vinculado a um desses anchors, o que faz com que ele permaneça parado sobre a mesa enquanto o usuário anda ao redor.
 
 ### 11.2 Fluxo técnico
 
-<!-- IMAGEM: fluxo técnico da aplicação -->
-![Fluxo técnico](docs/diagrams/fluxo-ra.png)
+![Fluxo técnico da Realidade Aumentada](docs/diagrams/fluxo-ra.png)
 
-1. A aplicação é aberta no navegador.
-2. O Vite serve os arquivos estáticos e o modelo GLB.
-3. O React monta a cena Three Fiber e o painel de controles.
-4. O `useGLTF` carrega o modelo `conjunto.glb` e nomeia os meshes.
-5. O usuário alterna camadas, gira em 90°, ajusta tamanho e seleciona órgãos.
-6. O estado global (zustand) reflete a seleção na cena.
-7. O `CameraControls` reenquadra a câmera na bounding box da seleção, com transição animada.
-8. Na aba Explorar, o usuário pode acionar a RA e posicionar o modelo sobre uma superfície real via WebXR.
+1. O aplicativo abre e o `ViroARSceneNavigator` inicia a sessão de RA, pedindo permissão de câmera.
+2. A `ViroARScene` é configurada com `anchorDetectionTypes={["PlanesHorizontal"]}`.
+3. O ARCore detecta superfícies horizontais e emite eventos de anchor.
+4. A `ViroARScene` **encaminha explicitamente** esses eventos ao seletor de planos, por meio de `handleAnchorFound`, `handleAnchorUpdated` e `handleAnchorRemoved`. Esse encaminhamento é obrigatório a partir do ViroReact 2.53 e está implementado em `src/ar/SpatialScene.tsx`.
+5. O `ViroARPlaneSelector` destaca os planos detectados e aguarda o toque do usuário.
+6. Ao tocar num plano, `corpoNaMesa` passa a `true` e os 23 `Viro3DObject` são instanciados.
+7. Como os vértices de cada GLB já estão na posição final (ver `scripts/split.mjs`), todos os órgãos são colocados em `[0, 0, 0]` e se encaixam automaticamente, reconstruindo o modelo completo.
+8. A partir daí, o usuário interage: toque para selecionar, menu para alcançar órgãos encobertos, gestos para mover e escalar, botões para girar, voltar e resetar.
 
-### 11.3 Elementos virtuais
+### 11.3 Decisões técnicas relevantes
 
-- modelo anatômico 3D (meshes nomeados);
-- painel de camadas (pele, caixa torácica, órgãos, vasos);
-- painel de estruturas agrupadas por órgão;
-- painel lateral com nome, função e localização do órgão;
-- destaque visual por isolamento e cópia ampliada do órgão selecionado;
-- controles de giro 90° e escala;
-- botão de abertura da RA.
+**Gestos no nó pai.** Os gestos (`onDrag`, `onPinch`, `onRotate`) ficam no `ViroNode` que envolve todos os órgãos, e não em cada objeto. Assim, arrastar o modelo funciona tocando em qualquer parte dele, porque o evento sobe do órgão para o nó pai.
+
+**Dois nós aninhados.** O nó externo recebe os gestos do usuário; o nó interno aplica o enquadramento (centro e zoom) calculado quando um órgão é isolado. Separar as duas responsabilidades evita que o enquadramento automático conflite com a manipulação manual.
+
+**Enquadramento por bounding box.** Ao isolar uma estrutura, a função `enquadrar()` une as *bounding boxes* das peças visíveis (pré-calculadas em `src/ar/caixas.ts`), move o conjunto para o centro do corpo — `[0, 0.314, 0]`, metade da altura de ~63 cm do modelo — e o amplia até atingir cerca de 35 cm, limitado a 3×. O órgão isolado aparece onde o usuário já está olhando, em vez de ficar na posição anatômica original.
+
+**Giro por botão, não por gesto.** O gesto de rotação de dois dedos do ViroReact testa o ponto médio entre os dedos, que frequentemente cai fora da malha do órgão e não registra o gesto. Por isso o giro foi implementado como botões de ±30° no HUD, que agem sobre o estado `rotacaoY`.
+
+**Bloqueio da seleção de plano após o posicionamento.** Os planos detectados continuam tocáveis mesmo depois de invisíveis. Sem tratamento, um toque que errasse o órgão acertaria um plano e o modelo saltaria para lá, dando a impressão de que havia sumido. A propriedade `disableClickSelection={corpoNaMesa}` desativa essa seleção assim que o corpo é posicionado.
 
 ---
 
@@ -244,35 +268,48 @@ O MetaVision combina **visualização 3D interativa em WebGL** com **experiênci
 ```text
 metavision/
 │
-├── public/
-│   └── models/
-│       └── conjunto.glb        # modelo anatômico otimizado
+├── mobile/                          # APLICATIVO PRINCIPAL (Android / RA)
+│   ├── App.tsx                      # HUD 2D: menu, descrição e botões
+│   ├── app.json                     # configuração Expo + plugin ViroReact (xRMode AR)
+│   ├── index.ts                     # ponto de entrada
+│   ├── metro.config.js              # bundler aceitando .glb como asset
+│   ├── package.json
+│   ├── setup-windows.ps1            # preparação do ambiente no Windows
+│   ├── TESTE_DE_ACEITACAO.md        # roteiro de teste em hardware
+│   ├── assets/
+│   │   └── modelos/                 # 23 arquivos .glb, um por órgão
+│   ├── scripts/
+│   │   └── verify-project.mjs       # validação automática do projeto
+│   ├── docs/
+│   │   ├── ARQUITETURA.md
+│   │   └── CUSTOMIZACAO.md
+│   └── src/
+│       ├── ar/
+│       │   ├── SpatialScene.tsx     # cena de RA, visibilidade e enquadramento
+│       │   ├── caixas.ts            # bounding box de cada órgão
+│       │   └── modelos.ts           # mapa id -> require do .glb
+│       ├── data/
+│       │   └── organs.ts            # 23 órgãos, 9 grupos e textos anatômicos
+│       └── store.ts                 # estado global (zustand)
 │
-├── scripts/
-│   └── optimize.mjs            # pipeline de otimização GLB
+├── src/                             # PROTÓTIPO WEB (precursor)
+│   ├── components/                  # painel de camadas e overlay de informações
+│   ├── scene/                       # cena Three.js / React Three Fiber
+│   ├── data/organs.ts
+│   └── store.ts
 │
-├── src/
-│   ├── components/
-│   │   └── Controls.tsx        # painel de camadas e estruturas
-│   ├── data/
-│   │   └── organs.ts           # registro de camadas e órgãos
-│   ├── scene/
-│   │   ├── Scene.tsx           # canvas, luzes, câmera, rig
-│   │   └── Model.tsx           # carregamento do GLB e interação
-│   ├── App.tsx
-│   ├── main.tsx
-│   ├── index.css
-│   └── store.ts                # estado global (zustand)
+├── public/models/conjunto.glb       # modelo anatômico completo (fonte da divisão)
+│
+├── scripts/                         # pipeline de assets (executado offline)
+│   ├── optimize.mjs                 # otimiza o GLB exportado do Blender
+│   ├── split.mjs                    # divide o conjunto em 1 GLB por órgão
+│   └── centros.mjs                  # calcula as bounding boxes dos órgãos
 │
 ├── docs/
-│   ├── diagrams/               # diagramas técnicos
-│   ├── documents/              # documentos complementares
-│   └── images/                 # screenshots e figuras
+│   ├── diagrams/                    # diagramas técnicos
+│   ├── images/                      # capturas de tela do aplicativo
+│   └── documents/                   # documentos complementares
 │
-├── index.html
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
 └── README.md
 ```
 
@@ -280,52 +317,70 @@ metavision/
 
 | Pasta | Finalidade |
 |---|---|
-| `src/components` | Componentes de UI React |
-| `src/scene` | Componentes de cena 3D (Canvas, modelo, câmera) |
-| `src/data` | Registro de camadas e meshes do modelo |
-| `public/models` | Modelos GLB servidos estaticamente |
-| `scripts` | Scripts auxiliares (otimização GLB) |
-| `docs/diagrams` | Diagramas técnicos |
-| `docs/images` | Screenshots e figuras |
-| `docs/documents` | Documentos complementares |
+| `mobile/src/ar` | Cena de Realidade Aumentada e dados geométricos dos órgãos |
+| `mobile/src/data` | Registro dos 23 órgãos, seus grupos e os textos anatômicos |
+| `mobile/assets/modelos` | Modelos GLB embarcados no aplicativo |
+| `scripts` | Pipeline que transforma o modelo do Blender nos assets finais |
+| `src`, `public` | Protótipo web, mantido como referência da etapa anterior |
+| `docs` | Diagramas, imagens e documentos da documentação técnica |
 
 ---
 
-## 13. Principais Scripts
+## 13. Principais Componentes
 
 | Arquivo | Responsabilidade |
 |---|---|
-| `src/scene/Scene.tsx` | Monta o Canvas, luzes, câmera e o rig de reenquadramento |
-| `src/scene/Model.tsx` | Carrega o GLB, aplica visibilidade por camada e trata o clique |
-| `src/components/Controls.tsx` | Painel de camadas e seleção de estruturas |
-| `src/store.ts` | Estado global (camadas visíveis, órgãos selecionados) |
-| `src/data/organs.ts` | Registro central de camadas e meshes |
-| `scripts/optimize.mjs` | Otimização do GLB (weld, simplify, prune) |
+| `mobile/App.tsx` | Monta o navegador de RA e todo o HUD 2D: menu de órgãos, painel de descrição recolhível e botões de giro, voltar e reset |
+| `mobile/src/ar/SpatialScene.tsx` | Cena de RA: detecção e seleção de plano, instanciação dos 23 órgãos, controle de visibilidade, enquadramento do órgão isolado e gestos |
+| `mobile/src/store.ts` | Estado global: `grupoAtivo`, `orgaosSelecionados`, `rotacaoY`, `corpoNaMesa` e `resetContador`, com as ações `abrirGrupo`, `alternarOrgao`, `voltar`, `girar` e `resetar` |
+| `mobile/src/data/organs.ts` | Registro dos 23 órgãos em 9 grupos, com localização, função e detalhe anatômico de cada um |
+| `mobile/src/ar/modelos.ts` | Mapeia o id de cada órgão ao `require()` do seu arquivo GLB — caminho literal, exigido pelo Metro |
+| `mobile/src/ar/caixas.ts` | Bounding box de cada órgão, usada para centralizar e dimensionar a estrutura isolada |
+| `mobile/metro.config.js` | Adiciona `glb` a `resolver.assetExts`, permitindo embarcar os modelos |
+| `scripts/split.mjs` | Divide `conjunto.glb` em um GLB por nó, preservando a posição original dos vértices |
+| `scripts/centros.mjs` | Calcula as bounding boxes que alimentam `caixas.ts` |
+| `scripts/optimize.mjs` | Otimiza o GLB exportado do Blender (weld, simplify, prune) |
+
+### Órgãos disponíveis
+
+São 23 estruturas organizadas em 9 grupos:
+
+| Grupo | Partes |
+|---|---|
+| Pulmão direito | lobos superior, médio e inferior |
+| Pulmão esquerdo | lobos superior e inferior |
+| Coração | átrios direito e esquerdo, ventrículos direito e esquerdo |
+| Fígado | lobos direito, esquerdo e caudado |
+| Estômago | estômago |
+| Intestino delgado | duodeno, jejuno-íleo |
+| Intestino grosso | cólons ascendente, transverso, descendente e sigmoide, apêndice |
+| Rins | rins direito e esquerdo |
+| Bexiga | bexiga |
 
 ---
 
 ## 14. Dependências
 
-Principais dependências do projeto (ver `package.json` para o conjunto completo):
+Dependências do aplicativo mobile (`mobile/package.json`):
 
 ```text
-react                 ^18.3.1
-react-dom             ^18.3.1
-three                 ^0.169.0
-@react-three/fiber    ^8.17.10
-@react-three/drei     ^9.114.0
-zustand               ^4.5.5
+@reactvision/react-viro   2.57.3
+expo                      57.0.23
+react                     19.2.3
+react-native              0.86.3
+zustand                   ^5.0.16
 ```
 
 Desenvolvimento:
 
 ```text
-typescript            ^5.6.2
-vite                  ^5.4.8
-@vitejs/plugin-react  ^4.3.2
-@gltf-transform/cli   ^4.1.0
-playwright            ^1.64.0
+typescript                5.9.3
+@types/react              19.2.2
 ```
+
+O ViroReact é obtido pelo npm e configurado como plugin do Expo em `app.json`. O ARCore é fornecido pelo **Google Play Services for AR**, instalado no próprio aparelho Android pela Play Store.
+
+> O aplicativo usa módulos nativos de RA e **não funciona no Expo Go** — é necessário gerar o build nativo com `expo prebuild` e `expo run:android`.
 
 ---
 
@@ -333,393 +388,402 @@ playwright            ^1.64.0
 
 ### Pré-requisitos
 
-- Node.js 18 ou superior;
-- npm (acompanha o Node);
+- Windows 10/11 64-bit (ou Linux/macOS com o SDK Android configurado);
+- **Node.js 20 LTS ou 22 LTS** — o projeto exige `>=20 <23`;
+- Android Studio com Android SDK e Platform Tools (`adb` no PATH);
 - Git;
-- navegador moderno com suporte a WebGL 2 (Chrome, Firefox, Edge ou Safari recentes);
-- dispositivo com suporte a WebXR para testar a RA;
-- **Blender 3.6 LTS** (opcional, apenas para edição do modelo — a versão 4.x apresenta incompatibilidade com o template Z-Anatomy).
+- **Smartphone Android físico compatível com ARCore**, com depuração USB habilitada;
+- Blender 3.6 LTS (opcional, apenas para editar os modelos).
 
 ### Procedimento
 
-1. Instale o Node.js 18+ e verifique com `node -v`.
-2. Instale o Git.
-3. Clone o repositório.
-4. Na pasta do projeto, execute `npm install`.
-5. Garanta que o modelo `public/models/conjunto.glb` está presente.
-6. Execute `npm run dev`.
-7. Abra o endereço indicado pelo Vite no navegador.
+1. Instale o Node.js 20 ou 22 e confirme com `node -v`.
+2. Instale o Android Studio, abra o SDK Manager e instale o Android SDK e as Platform Tools.
+3. Adicione o `adb` ao PATH e confirme com `adb version`.
+4. No smartphone, habilite as **opções do desenvolvedor** e a **depuração USB**, e instale o **Google Play Services for AR** pela Play Store.
+5. Instale o Git e clone o repositório.
+6. Entre na pasta `mobile` e instale as dependências.
+7. Conecte o celular por USB e autorize a depuração quando o aparelho perguntar.
+
+No Windows, os passos 6 e 7 podem ser executados pelo script de preparação:
+
+```powershell
+cd mobile
+Set-ExecutionPolicy -Scope Process Bypass
+.\setup-windows.ps1
+```
+
+O script verifica `node`, `npm` e `adb`, instala as dependências, roda a validação do projeto, executa o Expo Doctor, gera o projeto Android nativo e lista os dispositivos conectados.
 
 ---
 
-## 16. Como Executar
+## 16. Como Executar o Projeto
 
 ```bash
 git clone https://github.com/1Lucasi/metavision.git
-cd metavision
+cd metavision/mobile
+npm install
+```
+
+Validação do projeto e geração do build nativo:
+
+```bash
+npm run verify     # confere arquivos, versões e configuração de RA
+npm run doctor     # Expo Doctor — incompatibilidades de dependências
+npm run prebuild   # gera o projeto Android nativo
+adb devices        # o celular deve aparecer como "device"
+npm run android    # compila, instala e abre no aparelho
+```
+
+### Regerar os modelos 3D (opcional)
+
+A partir de um GLB exportado do Blender, na raiz do repositório:
+
+```bash
+npm install
+node scripts/optimize.mjs public/models/bruto.glb public/models/conjunto.glb
+node scripts/split.mjs public/models/conjunto.glb mobile/assets/modelos
+node scripts/centros.mjs
+```
+
+### Executar o protótipo web (opcional)
+
+```bash
 npm install
 npm run dev
 ```
 
-A aplicação será servida em `http://localhost:3016`.
-
-Para gerar a build de produção:
-
-```bash
-npm run build
-npm run preview
-```
-
-Para otimizar um GLB bruto exportado do Blender:
-
-```bash
-node scripts/optimize.mjs public/models/bruto.glb public/models/conjunto.glb
-```
-
-### Deploy
-
-O deploy da aplicação é feito na **Vercel**, a partir da branch principal do repositório.
+A aplicação web é servida em `http://localhost:3016`.
 
 ---
 
 ## 17. Como Utilizar a Aplicação
 
-A aplicação é organizada em três abas, seguindo o fluxo do experimento:
+### 17.1 Posicionar o modelo
 
-### Aba **Explorar**
-1. Aguarde o carregamento do modelo anatômico.
-2. Utilize o painel **Camadas** para alternar entre visível, transparente e oculto.
-3. Em **Estruturas**, selecione um órgão individual ou um grupo (ex: Coração) para isolar.
-4. Clique diretamente em um mesh na cena 3D para adicioná-lo/removê-lo da seleção.
-5. Use os controles para girar em passos de 90° e ajustar o tamanho do modelo.
-6. Toque no botão de RA para posicionar o modelo sobre uma superfície real.
-7. Consulte o painel lateral para ver nome, função e localização do órgão.
+Ao abrir o aplicativo, autorize o acesso à câmera. Mova o celular lentamente apontando para uma mesa, bancada ou piso com textura visível. Os planos detectados aparecem destacados na tela, junto com a instrução de posicionamento.
 
-### Aba **Atividade**
-Realize o quiz de identificação: toque na parte do corpo pedida, com registro automático de acertos, erros e tempo.
+![Detecção do plano horizontal](docs/images/01-deteccao-plano.jpg)
 
-### Aba **Avaliação**
-Preencha o formulário SUS (System Usability Scale) para avaliar a usabilidade da aplicação.
+Toque no plano onde deseja colocar o modelo. O corpo aparece imediatamente no ponto tocado, em aproximadamente 31 cm de altura, e permanece ancorado ali.
 
-<!-- IMAGEM: tela principal da aplicação -->
-![Interface da aplicação](docs/images/interface.png)
+![Modelo posicionado sobre a mesa](docs/images/02-corpo-posicionado.jpg)
+
+### 17.2 Observar de vários ângulos
+
+Caminhe ao redor da mesa: o modelo permanece fixo no espaço real, permitindo observar as relações entre os órgãos de qualquer ponto de vista. Os botões ↺ e ↻ giram o modelo em passos de 30°, e o gesto de pinch ajusta o tamanho. Arrastar com o dedo reposiciona o modelo sobre a superfície.
+
+| Vista lateral | Vista posterior |
+|---|---|
+| ![Modelo visto de outro ângulo](docs/images/03-corpo-outro-angulo.jpg) | ![Modelo rotacionado](docs/images/04-corpo-rotacionado.jpg) |
+
+### 17.3 Selecionar e isolar um órgão
+
+Toque diretamente em um órgão para abri-lo. O restante do corpo desaparece, a estrutura escolhida vai ao centro e é ampliada, e o painel inferior exibe sua **localização**, **função** e **detalhe anatômico**.
+
+![Coração isolado com a descrição](docs/images/05-coracao-isolado.jpg)
+
+Aproxime-se para examinar a estrutura em detalhe:
+
+![Coração ampliado](docs/images/06-coracao-ampliado.jpg)
+
+Órgãos encobertos — como o coração, atrás dos pulmões, ou os rins, atrás das alças intestinais — são alcançados pelo **menu** no canto superior esquerdo, que lista todos os grupos e suas partes.
+
+| Pulmão direito | Intestino delgado | Rins |
+|---|---|---|
+| ![Pulmão direito isolado](docs/images/07-pulmao-direito.jpg) | ![Intestino delgado isolado](docs/images/08-intestino-delgado.jpg) | ![Rins isolados](docs/images/09-rins.jpg) |
+
+Com um órgão aberto, tocar numa de suas partes isola apenas aquela parte — por exemplo, o átrio direito dentro do coração. O botão **Voltar** sobe um nível por vez (parte → órgão → corpo inteiro) e o botão **Reset** restaura a cena ao estado inicial. Tocar no título da descrição recolhe o painel e libera a vista.
 
 ---
 
-## 18. Fluxo de Funcionamento
+## 18. Fluxo de Navegação
 
-```mermaid
-flowchart TD
-    A[Início] --> B[Abrir aplicação no navegador]
-    B --> C{Escolher aba}
-    C -- Explorar --> D[Carregar modelo GLB]
-    D --> E[Renderizar cena 3D]
-    E --> F{Interação}
-    F -- Camadas --> G[Atualiza visibilidade]
-    F -- Clique/painel --> H[Alterna seleção]
-    F -- Giro 90° / escala --> I[Transforma modelo]
-    F -- Abrir RA --> J[WebXR sobre superfície]
-    G --> E
-    H --> K[Reenquadra câmera + destaque]
-    I --> E
-    K --> E
-    C -- Atividade --> L[Quiz de toque]
-    L --> M[Registra acertos / erros]
-    C -- Avaliação --> N[Formulário SUS]
-    N --> O[Envia respostas]
+```text
+Abertura do aplicativo
+      ↓
+Permissão de câmera
+      ↓
+Detecção de planos horizontais
+      ↓
+Toque no plano  ──────────────────────┐
+      ↓                                │
+CORPO INTEIRO (23 órgãos)              │ Reset
+      ↓  toque no órgão / menu         │
+ÓRGÃO ABERTO (ex: Coração)             │
+   + descrição do grupo                │
+      ↓  toque na parte                │
+PARTE ISOLADA (ex: Átrio direito)      │
+   + descrição da parte                │
+      ↓  Voltar                        │
+   sobe um nível  ─────────────────────┘
 ```
 
 ---
 
 ## 19. Caso de Uso
 
-<!-- IMAGEM: diagrama de caso de uso -->
-![Caso de uso](docs/diagrams/caso-de-uso.png)
+![Diagrama de caso de uso](docs/diagrams/caso-de-uso.png)
 
-Atores: estudante / docente.
-Casos de uso principais:
-- visualizar e isolar estruturas anatômicas torácicas e cervicais em 3D;
-- posicionar o modelo sobre uma superfície real via RA;
-- realizar atividade de identificação de órgãos;
-- avaliar a usabilidade da aplicação (SUS).
+**Atores:** estudante da área da saúde, docente de anatomia e pesquisador da equipe.
+
+**Casos de uso principais:** detectar a superfície e posicionar o corpo; visualizar o modelo em RA; mover, escalar e girar; selecionar órgão por toque ou pelo menu; isolar parte de um órgão; consultar a descrição; voltar um nível e reiniciar a cena. Os casos de avaliação (atividade de identificação, questionário SUS e coleta de dados) compõem a etapa experimental do projeto.
 
 ---
 
-## 20. Fluxo de Navegação
-
-```text
-Tela Inicial
-    ↓
-┌─── Explorar ────────────────┐
-│  Cena 3D + Painéis          │
-│  Camadas / Giro / Tamanho   │
-│  Seleção de Órgão           │
-│  Painel de Informações      │
-│  Abrir RA (WebXR)           │
-└─────────────────────────────┘
-    ↓
-┌─── Atividade ───────────────┐
-│  Quiz de toque              │
-│  Registro de acertos        │
-└─────────────────────────────┘
-    ↓
-┌─── Avaliação ───────────────┐
-│  Formulário SUS             │
-└─────────────────────────────┘
-```
-
----
-
-## 21. Interface
-
-Screenshots reais do projeto devem ser armazenados em `docs/images/`.
-
-Exemplo de organização:
-
-```text
-docs/images/
-├── tela-inicial.png
-├── aba-explorar.png
-├── isolamento-coracao.png
-├── aba-atividade.png
-├── aba-avaliacao.png
-└── experiencia-ra.png
-```
-
-<!-- IMAGEM: screenshots da interface -->
-![Screenshots da interface](docs/images/interface-exemplo.png)
-
----
-
-## 22. Testes Técnicos
+## 20. Testes Técnicos
 
 | Teste | Procedimento | Resultado esperado | Resultado obtido | Status |
 |---|---|---|---|---|
-| Build | `npm run build` | Build concluída sem erros | A preencher | 🚧 |
-| Dev server | `npm run dev` | Servidor sobe em `localhost:3016` | A preencher | 🚧 |
-| Carregamento do GLB | Abrir no navegador | Modelo renderiza na cena | A preencher | 🚧 |
-| Alternância de camadas | Clicar nos checkboxes | Camada aparece/some | A preencher | 🚧 |
-| Isolamento de órgão | Marcar um órgão no painel | Só o órgão permanece visível | A preencher | 🚧 |
-| Seleção por clique | Clicar em um mesh na cena | Órgão entra na seleção | A preencher | 🚧 |
-| Reenquadramento | Isolar um órgão | Câmera foca na bounding box | A preencher | 🚧 |
-| Giro 90° | Acionar controle de rotação | Modelo gira em passos | A preencher | 🚧 |
-| RA no navegador | Acionar botão de RA | Modelo é posicionado sobre superfície | A preencher | 🚧 |
-| Quiz de toque | Executar atividade | Acertos/erros são registrados | A preencher | 🚧 |
+| Instalação | `npm install` em `mobile/` | Conclui sem erro fatal | Concluído sem erro | ✅ |
+| Validação do projeto | `npm run verify` | Arquivos, versões e configuração de RA corretos | Aprovado | ✅ |
+| Build nativo | `npm run prebuild` + `npm run android` | Compila, instala e abre no aparelho | Aplicativo instalado e aberto | ✅ |
+| Permissão de câmera | Abrir o aplicativo | Solicita e recebe a permissão | Permissão concedida | ✅ |
+| Detecção de plano | Mover o celular sobre uma mesa | Planos horizontais destacados | Planos detectados | ✅ |
+| Posicionamento | Tocar no plano | Modelo aparece no ponto tocado | Modelo posicionado corretamente | ✅ |
+| Estabilidade espacial | Caminhar ao redor da mesa | Modelo permanece ancorado | Permaneceu estável | ✅ |
+| Carregamento dos modelos | Observar o corpo completo | 23 órgãos visíveis e encaixados | Todos renderizados e alinhados | ✅ |
+| Seleção por toque | Tocar num órgão na cena | Grupo abre e os demais somem | Funcionou | ✅ |
+| Seleção pelo menu | Abrir o menu e escolher Coração | Coração isolado e enquadrado | Funcionou | ✅ |
+| Isolamento de parte | Com o grupo aberto, tocar numa parte | Apenas a parte permanece visível | Funcionou | ✅ |
+| Descrição do órgão | Isolar uma estrutura | Localização, função e detalhe exibidos | Exibidos corretamente | ✅ |
+| Giro por botão | Tocar em ↺ e ↻ | Modelo gira em passos de 30° | Funcionou | ✅ |
+| Escala por pinch | Gesto de pinch | Tamanho varia entre 0,1× e 1,5× | Funcionou | ✅ |
+| Arraste | Arrastar o modelo | Reposiciona sobre a superfície real | Funcionou | ✅ |
+| Voltar / Reset | Acionar os botões | Sobe um nível / restaura o estado inicial | Funcionou | ✅ |
 
 ### Avaliação com usuários — SUS
 
-A avaliação de usabilidade é feita por meio da **System Usability Scale (SUS)**: 10 afirmações em escala Likert de 1 a 5, aplicadas via Google Forms após o uso da aplicação. O instrumento avalia apenas a usabilidade do sistema (não a aprendizagem).
+A usabilidade será avaliada pela **System Usability Scale (SUS)**: 10 afirmações em escala de 1 a 5, aplicadas via Google Forms após o uso do aplicativo. O instrumento mede apenas a usabilidade percebida do sistema, não a aprendizagem — o desempenho de aprendizagem é medido separadamente, pela atividade de identificação anatômica prevista no protocolo experimental.
 
 ---
 
-## 23. Dispositivos Testados
+## 21. Dispositivos Testados
 
-| Dispositivo | Sistema | Navegador | Suporte WebXR | Resultado |
-|---|---|---|---|---|
-| A preencher | A preencher | A preencher | A preencher | A preencher |
+| Dispositivo | Sistema | Suporte ARCore | Resultado |
+|---|---|---|---|
+| Samsung S10e | Android 12 One UI 4.1 | Compatível | Aplicativo executou com detecção de planos e interação completas |
 
----
-
-## 24. Limitações Conhecidas
-
-- a experiência de RA via WebXR depende de dispositivo e navegador compatíveis;
-- o modelo depende de meshes nomeados conforme a convenção em `src/data/organs.ts`;
-- camadas de pele e vasos ainda não estão presentes no GLB atual;
-- o desempenho pode variar em dispositivos sem WebGL 2 ou com GPU limitada;
-- o raycaster do Three.js intersecta meshes mesmo invisíveis — tratado no código, mas requer atenção em novos componentes;
-- o template Z-Anatomy é incompatível com Blender 4.x; usar 3.6 LTS.
+Os testes registrados neste documento foram realizados em 29 e 31 de outubro de 2026. Somente aparelhos efetivamente testados estão listados.
 
 ---
 
-## 25. Evidências de Funcionamento
+## 22. Evidências de Funcionamento
 
-A equipe deverá incluir:
+Todas as capturas da seção 17 foram obtidas diretamente do aplicativo em execução em um Android físico, com o modelo anatômico ancorado sobre uma mesa real. Os arquivos estão em `docs/images/`.
 
-- captura(s) de tela de cada aba (Explorar, Atividade, Avaliação);
-- vídeo curto demonstrando a interação com o modelo e a experiência de RA;
-- link para vídeo pitch publicado.
+| Arquivo | Evidência |
+|---|---|
+| `01-deteccao-plano.jpg` | Plano horizontal detectado e destacado, com a instrução de posicionamento |
+| `02-corpo-posicionado.jpg` | Modelo completo ancorado sobre a mesa |
+| `03-corpo-outro-angulo.jpg` | Mesmo modelo observado de outro ponto de vista |
+| `04-corpo-rotacionado.jpg` | Modelo girado pelos botões do HUD |
+| `05-coracao-isolado.jpg` | Coração isolado, enquadrado e com a descrição completa |
+| `06-coracao-ampliado.jpg` | Coração ampliado, demonstrando o zoom automático |
+| `07-pulmao-direito.jpg` | Pulmão direito isolado com os três lobos |
+| `08-intestino-delgado.jpg` | Intestino delgado isolado com a descrição |
+| `09-rins.jpg` | Rins isolados — estrutura encoberta, alcançada pelo menu |
 
-Exemplo:
 
-```markdown
-[Assistir demonstração](COLE_AQUI_O_LINK_DO_VIDEO)
+---
+
+## 23. Limitações Conhecidas
+
+- O aplicativo depende de **Android compatível com ARCore**; não há versão para iOS testada, embora o projeto esteja configurado para ambas as plataformas.
+- A detecção de planos exige **superfície horizontal com textura visível** e iluminação adequada; superfícies lisas, reflexivas ou muito escuras dificultam ou impedem o reconhecimento.
+- Apenas planos **horizontais** são detectados — paredes e superfícies verticais não são suportadas.
+- O ARCore pode fundir ou remover planos durante a sessão. Quando isso ocorre com o plano escolhido, o aplicativo retorna à etapa de seleção de superfície (tratado, mas perceptível ao usuário).
+- O gesto de **rotação por dois dedos** é pouco confiável: o ViroReact testa o ponto médio entre os dedos, que costuma cair fora da malha do órgão. Por isso o giro foi implementado em botões.
+- O escopo anatômico atual cobre órgãos **torácicos e abdominais**. As estruturas **cervicais** previstas no projeto — traqueia, laringe, faringe, tireoide e esôfago — ainda não foram incorporadas ao modelo.
+- As camadas de **pele, caixa torácica e vasos** estão previstas na estrutura de dados, mas ainda não existem no modelo 3D.
+- O template **Z-Anatomy é incompatível com o Blender 4.x**; a equipe padronizou o Blender 3.6 LTS.
+- O aplicativo **não funciona no Expo Go**, por usar módulos nativos de RA.
+- A **atividade de identificação** (quiz) ainda não foi implementada.
+- O identificador do aplicativo ainda usa o nome do white label de origem (`WL02 Spatial AR`, pacote `edu.facens.wl02spatialar`); a renomeação para MetaVision está pendente.
+
+---
+
+## 24. Problemas Encontrados e Soluções
+
+### Problema 1 — Encaminhamento dos anchors ao seletor de planos
+
+**Problema:** os planos eram detectados pelo ARCore, mas o `ViroARPlaneSelector` não os apresentava, impedindo o posicionamento do modelo.
+**Causa:** a partir do ViroReact 2.53, o `ViroARPlaneSelector` deixou de gerenciar sozinho a detecção; os eventos de anchor da `ViroARScene` precisam ser encaminhados explicitamente.
+**Solução:** encaminhar `onAnchorFound`, `onAnchorUpdated` e `onAnchorRemoved` ao seletor por uma `ref`, em `src/ar/SpatialScene.tsx`.
+
+### Problema 2 — Modelo "sumindo" ao tocar na cena
+
+**Problema:** depois de posicionado, um toque que errasse o órgão fazia o modelo saltar para outro lugar, parecendo ter desaparecido.
+**Causa:** os planos detectados continuam tocáveis mesmo após ficarem invisíveis; o toque selecionava outro plano e o conteúdo era reposicionado nele.
+**Solução:** desativar a seleção de plano assim que o corpo é posicionado, com `disableClickSelection={corpoNaMesa}`.
+
+### Problema 3 — Perda do plano escolhido durante a sessão
+
+**Problema:** o modelo era removido da cena sem ação do usuário.
+**Causa:** o ARCore ocasionalmente funde planos próximos e remove o anchor originalmente escolhido; o seletor então retira o conteúdo da cena.
+**Solução:** guardar o `anchorId` do plano selecionado e, em `onPlaneRemoved`, liberar a seleção devolvendo o aplicativo à etapa de escolha de superfície.
+
+### Problema 4 — Órgãos encobertos inalcançáveis pelo toque
+
+**Problema:** coração e rins não podiam ser selecionados, por estarem atrás dos pulmões e das alças intestinais.
+**Causa:** a seleção por toque depende da malha estar visível ao raio de teste.
+**Solução:** adicionar um menu lateral que lista todos os grupos e suas partes, permitindo abrir qualquer estrutura independentemente de estar encoberta.
+
+### Problema 5 — Gesto de rotação não registrado
+
+**Problema:** o gesto de girar com dois dedos quase nunca funcionava sobre o órgão.
+**Causa:** o ViroReact avalia o ponto médio entre os dedos, que frequentemente cai fora da malha.
+**Solução:** implementar o giro como botões de ±30° no HUD, agindo sobre o estado `rotacaoY`, e manter o gesto apenas como alternativa.
+
+### Problema 6 — Modelo único impedia a visibilidade individual
+
+**Problema:** com o `conjunto.glb` carregado como um único objeto, não era possível esconder ou isolar órgãos separadamente.
+**Causa:** o `Viro3DObject` controla visibilidade por objeto, não por mesh interna.
+**Solução:** criar `scripts/split.mjs`, que divide o GLB em um arquivo por órgão preservando a posição original dos vértices. Como nenhum nó tem transformação própria, os 23 arquivos são posicionados em `[0, 0, 0]` e se reencaixam exatamente.
+
+### Problema 7 — Modelos `.glb` não embarcados pelo bundler
+
+**Problema:** os arquivos dos órgãos não eram incluídos no pacote do aplicativo.
+**Causa:** o Metro não reconhece `.glb` como asset por padrão, e só embute `require()` com caminho literal.
+**Solução:** adicionar `glb` a `resolver.assetExts` em `metro.config.js` e declarar um `require()` literal por órgão em `src/ar/modelos.ts`.
+
+---
+
+## 25. Cronograma Técnico
+
+| Atividade | Responsável | Status |
+|---|---|---|
+| Revisão bibliográfica | Fernanda | ✅ |
+| Levantamento de requisitos | Fernanda, Gabriel Baldi | ✅ |
+| Pesquisa e seleção dos modelos 3D | Carolina | ✅ |
+| Exportação e conversão para GLB | Carolina | ✅ |
+| Pipeline de otimização e divisão dos modelos | Lucas, Higor | ✅ |
+| Convenção de identificadores dos órgãos | Eduarda, Gabriel Ogino | ✅ |
+| Protótipo web de visualização 3D | Lucas, Higor | ✅ |
+| Descrições anatômicas dos 23 órgãos | Eduarda, Carolina | ✅ |
+| Base React Native + ViroReact | Lucas | ✅ |
+| Detecção de planos e posicionamento | Gabriel Baldi | ✅ |
+| Renderização dos 23 órgãos em RA | Lucas, Higor | ✅ |
+| Seleção por toque e navegação por grupos | Eduarda, Gabriel Ogino | ✅ |
+| Menu de órgãos encobertos | Eduarda | ✅ |
+| Enquadramento e ampliação do órgão isolado | Gabriel Ogino | ✅ |
+| HUD: descrição, giro, voltar e reset | Lucas | ✅ |
+| Testes em dispositivo Android | Equipe | ✅ |
+| Documentação GitHub | Fernanda, Carolina | ✅ |
+| Artigo científico | Fernanda, Gabriel Ogino | 🚧 |
+| Vídeo pitch II | Fernanda, Gabriel Ogino | 🚧 |
+| Formulário SUS e protocolo experimental | Carolina | 🚧 |
+| Atividade de identificação (quiz) | Equipe | ⬜ |
+| Órgãos cervicais | Carolina | ⬜ |
+
+---
+
+## 26. Controle de Versão
+
+O desenvolvimento é organizado em branches por frente de trabalho, integradas à `main` por pull request. Exemplos de branches utilizadas: `descricao-orgaos`, `mobile-viro`, `mobile-navegacao-orgaos` e `padronizacao-ohata`.
+
+Exemplos de mensagens de commit do projeto:
+
+```text
+feat: adiciona base React Native (WL02) em mobile/
+feat: divide conjunto.glb em 23 modelos para o app
+feat: mostra o coração na cena AR com botões de giro
+feat: adiciona navegação por órgãos na cena AR
+docs: padroniza README conforme modelo da disciplina
 ```
 
 ---
 
-## 26. Repositórios e Recursos
+## 27. Repositórios e Recursos
 
 | Recurso | Link |
 |---|---|
 | Código-fonte | https://github.com/1Lucasi/metavision |
-| Modelo de repositório (disciplina) | https://github.com/dr-ohata/upx-modelo |
+| Modelo de documentação da disciplina | https://github.com/dr-ohata/upx-modelo |
 | Referência de interação | https://github.com/ashemag/human-atlas |
-| Modelos anatômicos (NIH 3D) | https://3d.nih.gov |
+| Modelos anatômicos — NIH 3D | https://3d.nih.gov |
 | Template Z-Anatomy | https://z-anatomy.com |
-| Deploy (Vercel) | A preencher |
-| Miro (fluxo do app) | A preencher |
-| Trello (gestão) | https://trello.com/b/bcPnYlUg/metavision |
-| Vídeo pitch | A preencher |
-| Formulário SUS (Google Forms) | A preencher |
+| ViroReact | https://github.com/ReactVision/viro |
+| Dispositivos compatíveis com ARCore | https://developers.google.com/ar/devices |
+| Trello (gestão do projeto) | https://trello.com/b/bcPnYlUg/metavision |
+| Vídeo pitch parcial I | https://youtu.be/D23BhZz_LeI |
+| Formulário | https://docs.google.com/forms/d/e/1FAIpQLScVlfK32sfD3mPcIXHUkfAjdtzUNHGRIMVCeE6w3cJpg2aEaQ/viewform |
 
 ---
 
-## 27. Cronograma Técnico
+## 28. Melhorias Futuras
 
-| Atividade | Responsável | Status |
+- Incorporar as estruturas cervicais previstas no escopo: traqueia, laringe, faringe, tireoide e esôfago.
+- Adicionar as camadas de pele, caixa torácica e vasos ao modelo.
+- Implementar a atividade de identificação anatômica, com registro de acertos, erros e tempo.
+- Renomear o aplicativo e o identificador de pacote de `WL02 Spatial AR` para MetaVision.
+- Avaliar a detecção de planos verticais para uso em parede.
+- Publicar um APK de distribuição para facilitar os testes com os participantes do experimento.
+- Validar e documentar a execução em iOS.
+
+---
+
+## 29. Custos e Recursos
+
+| Recurso | Tipo | Custo |
 |---|---|---|
-| Revisão bibliográfica (ensino de anatomia, dificuldade espacial) | Fernanda | 🚧 |
-| Levantamento de requisitos | Fernanda, Baldi | ✅ |
-| Configuração do projeto (Vite + React) | Lucas, Higor | ✅ |
-| Integração React Three Fiber | Lucas, Higor | ✅ |
-| Pipeline de otimização GLB | Lucas, Higor | ✅ |
-| Convenção de meshes e camadas | Eduarda, Gabriel Ogino | ✅ |
-| Exportação dos órgãos no Blender | Carol | ✅ |
-| Conversão para .glb/gltf | Carol | ✅ |
-| Painel de camadas e estruturas | Lucas, Higor | ✅ |
-| Isolamento visual do órgão selecionado | Eduarda | ✅ |
-| Isolamento e reenquadramento múltiplo | Lucas, Higor | ✅ |
-| Camadas por órgão (visível/transparente/oculto) | Carol | 🚧 |
-| Giro 90° e controle de tamanho | Carol | 🚧 |
-| Órgão em destaque flutuante | Gabriel Ogino, Eduarda | ⬜ |
-| Animação de transição de câmera | Gabriel Ogino | ⬜ |
-| Centralização do órgão no clique | Eduarda, Lucas | ⬜ |
-| Botão "voltar" (reset) | Eduarda | 🚧 |
-| Habilitar interação por toque (Camera Controls) | Baldi | 🚧 |
-| Validar renderização e botão de RA no navegador | Baldi | 🚧 |
-| Abas Explorar, Atividade e Avaliação | Carol | 🚧 |
-| Formulário SUS (Google Forms) | Carol | ✅ |
-| Documentação GitHub | Fernanda, Carol | 🚧 |
-| Artigo científico (AC1 / AC2) | Fernanda, Gabriel Ogino | ✅ |
-| Vídeo pitch II | Fernanda, Gabriel Ogino | 🚧 |
-| Polish e deploy (Vercel) | Lucas, Higor | 🚧 |
-
----
-
-## 28. Controle de Versão
-
-Exemplos de mensagens de commit utilizadas no projeto:
-
-```text
-feat: adiciona isolamento múltiplo de órgãos
-feat: carrega modelo conjunto.glb com meshes nomeados
-fix: evita clique em mesh invisível pelo raycaster
-docs: padroniza README conforme modelo da disciplina
-chore: otimiza GLB com weld e simplify
-```
-
-A equipe deverá evitar concentrar todo o desenvolvimento em um único commit.
-
----
-
-## 29. Problemas Encontrados e Soluções
-
-### Problema 1 — Lobo exportado em múltiplas primitivas
-
-**Problema:** meshes com mais de um slot de material no Blender eram exportados como `Group` contendo sub-meshes com sufixos (`_1`, `_2`), quebrando a comparação direta por nome.
-**Causa:** o GLTFLoader divide meshes multi-material em várias primitivas.
-**Solução:** função `findOrganId` em `src/scene/Model.tsx` que sobe pela hierarquia até encontrar um ancestral com id conhecido.
-
-### Problema 2 — Clique atingindo meshes invisíveis
-
-**Problema:** o raycaster do Three.js intersecta meshes mesmo com `visible=false`, trocando a seleção para um órgão escondido ao girar próximo.
-**Causa:** comportamento padrão do raycaster.
-**Solução:** verificação explícita de `e.object.visible` antes de alternar a seleção.
-
-### Problema 3 — Enquadramento incorreto após seleção múltipla
-
-**Problema:** ao selecionar múltiplos meshes, a câmera não enquadrava o conjunto completo.
-**Causa:** a bounding box precisa unir todos os meshes selecionados antes do `fitToBox`.
-**Solução:** `Box3.expandByObject` percorrendo a cena e somando as caixas dos meshes marcados.
-
-### Problema 4 — Incompatibilidade do Blender 4.x com Z-Anatomy
-
-**Problema:** o template Z-Anatomy apresenta falhas de importação/exportação em versões recentes do Blender.
-**Causa:** mudanças no addon de glTF entre 3.x e 4.x.
-**Solução:** padronizar o uso do **Blender 3.6 LTS** para toda a equipe.
-
----
-
-## 30. Melhorias Futuras
-
-- concluir cobertura dos órgãos cervicais (traqueia, laringe, faringe, tireoide);
-- adicionar camadas de pele e vasos ao modelo;
-- expandir o quiz da aba Atividade com múltiplos níveis de dificuldade;
-- adicionar painel de informações anatômicas por órgão (nome, função, localização);
-- suportar múltiplas regiões anatômicas (abdome, cabeça);
-- adicionar modo de corte transversal;
-- melhorar a performance em dispositivos móveis;
-- registrar métricas de uso agregadas (acertos, tempo de interação);
-- publicar o relatório final de usabilidade a partir das respostas do SUS.
-
----
-
-## 31. Custos e Recursos
-
-| Recurso | Tipo | Custo/Condição |
-|---|---|---|
-| Node.js | Software | Gratuito |
-| React / Three.js / Vite | Software | Gratuito (código aberto) |
+| React Native, Expo, ViroReact | Software | Gratuito (código aberto) |
+| Android Studio e SDK | Software | Gratuito |
 | Blender 3.6 LTS | Software | Gratuito |
-| GitHub | Serviço | Gratuito para o uso acadêmico |
-| Vercel | Serviço | Plano gratuito |
-| Google Forms (SUS) | Serviço | Gratuito |
-| Miro / Trello / Discord | Serviço | Plano gratuito |
 | Modelos Z-Anatomy / NIH 3D | Assets | Acervo aberto |
-| Computador | Hardware | Equipamento da equipe |
-| Smartphone | Hardware | Equipamento da equipe |
+| GitHub, Trello, Miro, Discord, Google Forms | Serviços | Planos gratuitos |
+| Notebook e smartphone Android | Hardware | Equipamentos da equipe |
 
-O custo total do projeto tende a zero; o principal "investimento" é hora-trabalho.
-
----
-
-## 32. Licença
-
-Projeto acadêmico desenvolvido para fins educacionais na disciplina de UPX — Realidade Aumentada da Facens.
-
-Caso a equipe adote uma licença formal de software, substituir este texto e incluir o arquivo `LICENSE` correspondente.
+O custo direto do projeto é nulo; o investimento é de hora-trabalho da equipe.
 
 ---
 
-## 33. Autores
+## 30. Créditos dos Modelos 3D
 
-- **Eduarda Gomes Abreu e Almeida** — Interação
-- **Carolina Leamari** — Aquisição e preparação de assets
-- **Fernanda Theodoro Casali** — Documentação e pesquisa
-- **Gabriel Massayuki Teixeira Ogino** — Interação
-- **Lucas Proença Gonçalves do Santos** — Front / Visualização 3D
-- **Higor Bertinotti Aranda** — Front / Visualização 3D
-- **Gabriel Baldi Gomes dos Santos** — A definir
+Os modelos anatômicos derivam dos acervos abertos **Z-Anatomy** e **NIH 3D**, adaptados no Blender pela equipe. As licenças Creative Commons de cada modelo utilizado estão registradas em `docs/documents/`, conforme exigido pelas fontes.
 
-**Orientação:** Prof. Daniel Ohata — Gerente de Projeto
-**Instituição:** Facens
-**Disciplina:** UPX — Realidade Aumentada
-**Semestre:** 2026.2
+---
+
+## 31. Licença
+
+Projeto acadêmico desenvolvido para fins educacionais na disciplina de UPX — Realidade Aumentada do Centro Universitário Facens. Os modelos 3D mantêm as licenças de seus acervos de origem.
+
+---
+
+## 32. Autores
+
+- **Carolina Leamari** — Aquisição e preparação dos assets 3D
+- **Eduarda Gomes Abreu e Almeida** — Interação e navegação
+- **Fernanda Theodoro Casali** — Documentação técnica, pesquisa e artigo
+- **Gabriel Baldi Gomes dos Santos** — Interação por toque e validação em RA
+- **Gabriel Massayuki Teixeira Ogino** — Interação e enquadramento
+- **Higor Bertinotti Aranda** — Desenvolvimento 3D e visualização
+- **Lucas Proença Gonçalves do Santos** — Desenvolvimento 3D e integração ViroReact
+
+**Orientação:** Prof. Daniel Ohata
+**Instituição:** Centro Universitário Facens — Sorocaba/SP
+**Disciplina:** UPX — Realidade Aumentada · 2026.2
 
 ---
 
 ## Checklist de Entrega
 
-- [x] Código-fonte atualizado
-- [x] Equipe identificada
-- [x] Versões das tecnologias registradas
-- [x] Arquitetura apresentada
-- [x] Funcionamento da RA explicado
+- [x] Código-fonte atualizado no repositório
+- [x] Equipe identificada com RA e responsabilidades
+- [x] Versões das tecnologias informadas
+- [x] Arquitetura apresentada em diagrama
+- [x] Funcionamento da RA explicado tecnicamente
 - [x] Estrutura de pastas documentada
-- [x] Scripts principais descritos
-- [x] Procedimento de instalação testado
-- [x] Procedimento de execução testado
-- [x] ODS do projeto declarados
-- [x] Instrumento de avaliação definido (SUS)
+- [x] Principais componentes descritos
+- [x] Procedimento de configuração do ambiente
+- [x] Procedimento de execução
+- [x] Procedimento de utilização
+- [x] Imagens reais da aplicação
+- [x] Evidências de funcionamento
+- [x] Testes técnicos registrados
 - [x] Limitações conhecidas documentadas
-- [x] Commits representam a evolução do projeto
-- [ ] Screenshots reais adicionados
-- [ ] Testes técnicos registrados
-- [ ] Dispositivos testados informados
-- [ ] Evidência de funcionamento (vídeo) adicionada
-- [ ] Deploy publicado na Vercel
-
----
-
-> Este README segue o modelo de documentação proposto pelo professor Daniel Ohata para a disciplina de UPX — Realidade Aumentada (Facens).
-
+- [x] Problemas e soluções registrados
+- [x] Histórico de commits representando a evolução
+- [ ] Dispositivo de teste identificado (seção 9 e 21)
+- [ ] Link do vídeo de demonstração
+- [ ] Link do formulário SUS

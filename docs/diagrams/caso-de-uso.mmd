@@ -1,0 +1,47 @@
+flowchart LR
+    EST(["Estudante<br/>da área da saúde"])
+    DOC(["Docente<br/>de anatomia"])
+    PESQ(["Pesquisador<br/>equipe MetaVision"])
+
+    subgraph SYS["MetaVision — aplicativo de RA"]
+        direction TB
+        UC1(["Detectar superfície<br/>e posicionar o corpo"])
+        UC2(["Visualizar o modelo<br/>anatômico em RA"])
+        UC3(["Mover, escalar e<br/>girar o modelo"])
+        UC4(["Selecionar órgão<br/>tocando na cena"])
+        UC5(["Selecionar órgão<br/>pelo menu"])
+        UC6(["Isolar parte de<br/>um órgão"])
+        UC7(["Consultar descrição<br/>do órgão"])
+        UC8(["Voltar um nível<br/>e reiniciar a cena"])
+        UC9(["Realizar atividade<br/>de identificação"])
+        UC10(["Responder o<br/>questionário SUS"])
+        UC11(["Coletar dados<br/>do experimento"])
+    end
+
+    EST --> UC1
+    EST --> UC2
+    EST --> UC3
+    EST --> UC4
+    EST --> UC5
+    EST --> UC6
+    EST --> UC7
+    EST --> UC8
+    EST --> UC9
+    EST --> UC10
+    DOC --> UC2
+    DOC --> UC5
+    DOC --> UC7
+    PESQ --> UC10
+    PESQ --> UC11
+
+    UC1 -.->|precede| UC2
+    UC4 -.->|inclui| UC7
+    UC5 -.->|inclui| UC7
+    UC6 -.->|inclui| UC7
+
+    classDef ok fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef plan fill:#f1f5f9,stroke:#94a3b8,color:#334155,stroke-dasharray: 4 3
+    classDef ator fill:#fae8ff,stroke:#a21caf,color:#4a044e
+    class UC1,UC2,UC3,UC4,UC5,UC6,UC7,UC8 ok
+    class UC9,UC10,UC11 plan
+    class EST,DOC,PESQ ator

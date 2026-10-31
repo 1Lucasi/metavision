@@ -1,0 +1,39 @@
+flowchart TB
+    A1([Usuário abre o MetaVision no Android])
+    A2[Permissão de câmera concedida]
+    A3["ViroARSceneNavigator inicia a sessão de RA"]
+    A4["ARCore captura o ambiente e<br/>detecta planos horizontais - mesa ou piso"]
+    A5["ViroARScene recebe os anchors e encaminha ao seletor:<br/>handleAnchorFound / Updated / Removed"]
+    A6["ViroARPlaneSelector destaca os planos<br/>e aguarda o toque do usuário"]
+    A7["Usuário toca no plano escolhido"]
+    A8["corpoNaMesa = true<br/>os 23 GLB são instanciados em 0,0,0 e se encaixam"]
+    A9["Modelo anatômico fica ancorado<br/>e estável sobre a superfície real"]
+
+    A10{Interação do usuário}
+    A11["Toque num órgão do corpo inteiro<br/>abrirGrupo - ex. Coração"]
+    A12["Menu lateral - alcança órgãos ocultos<br/>ex. coração atrás dos pulmões"]
+    A13["Com o grupo aberto, toque numa parte<br/>alternarOrgao - ex. Átrio direito"]
+    A14["enquadrar - une as bounding boxes,<br/>move ao centro do corpo e amplia até 3x"]
+    A15["HUD exibe Localização, Função<br/>e Detalhe anatômico"]
+    A16["Gestos: arrastar FixedToWorld,<br/>pinch para escala"]
+    A17["Botões: girar 30 graus, Voltar, Reset"]
+
+    A1 --> A2 --> A3 --> A4 --> A5 --> A6 --> A7 --> A8 --> A9 --> A10
+    A10 --> A11 --> A14
+    A10 --> A12 --> A14
+    A10 --> A13 --> A14
+    A10 --> A16 --> A10
+    A10 --> A17 --> A10
+    A14 --> A15 --> A10
+
+    R["ARCore pode fundir planos e remover o escolhido:<br/>onPlaneRemoved devolve o app à etapa de seleção"]
+    A9 -. tratamento de exceção .-> R
+    R -.-> A6
+
+    classDef ok fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef ra fill:#fed7aa,stroke:#ea580c,color:#7c2d12
+    classDef exc fill:#fee2e2,stroke:#dc2626,color:#7f1d1d,stroke-dasharray: 4 3
+    class A1,A2,A3 ok
+    class A4,A5,A6,A7,A8,A9 ra
+    class A10,A11,A12,A13,A14,A15,A16,A17 ok
+    class R exc

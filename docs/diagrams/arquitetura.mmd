@@ -1,0 +1,53 @@
+flowchart TB
+    U([Estudante da área da saúde])
+
+    subgraph APP["APLICATIVO MOBILE - MetaVision RA"]
+        direction TB
+        RN["React Native 0.86.3 + Expo 57.0.23<br/>index.ts"]
+        HUD["App.tsx - interface 2D sobre a câmera<br/>menu de órgãos, descrição, giro, voltar, reset"]
+        STORE["src/store.ts - zustand<br/>grupoAtivo, orgaosSelecionados,<br/>rotacaoY, corpoNaMesa"]
+        DADOS["src/data/organs.ts<br/>23 órgãos, 9 grupos e textos"]
+        CENA["src/ar/SpatialScene.tsx<br/>cena de RA, visibilidade e enquadramento"]
+        CAIXAS["src/ar/caixas.ts<br/>bounding box de cada órgão"]
+        MODELOS["src/ar/modelos.ts<br/>require dos 23 GLB"]
+    end
+
+    subgraph RA["CAMADA DE REALIDADE AUMENTADA"]
+        direction TB
+        VIRO["ViroReact 2.57.3<br/>ViroARScene, ViroARPlaneSelector,<br/>ViroNode, Viro3DObject"]
+        ARCORE["ARCore<br/>detecção de planos e rastreamento"]
+        CAM[(Câmera e sensores do Android)]
+    end
+
+    subgraph ASSETS["PIPELINE DE ASSETS - offline"]
+        direction TB
+        BL["Blender 3.6 LTS<br/>Z-Anatomy / NIH 3D"]
+        OPT["scripts/optimize.mjs<br/>weld, simplify, prune"]
+        CONJ[("public/models/conjunto.glb")]
+        SPLIT["scripts/split.mjs<br/>divide em 1 GLB por órgão"]
+        CENTROS["scripts/centros.mjs<br/>calcula as bounding boxes"]
+        GLBS[("mobile/assets/modelos/<br/>23 arquivos .glb - 2,6 MB")]
+    end
+
+    U --> RN --> HUD
+    HUD <--> STORE
+    STORE --> CENA
+    DADOS --> HUD
+    DADOS --> CENA
+    CAIXAS --> CENA
+    MODELOS --> CENA
+    CENA --> VIRO --> ARCORE --> CAM
+
+    BL --> OPT --> CONJ
+    CONJ --> SPLIT --> GLBS
+    CONJ --> CENTROS --> CAIXAS
+    GLBS -. require pelo Metro .-> MODELOS
+
+    classDef app fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef ra fill:#fed7aa,stroke:#ea580c,color:#7c2d12
+    classDef asset fill:#e0e7ff,stroke:#4f46e5,color:#1e1b4b
+    classDef ator fill:#fae8ff,stroke:#a21caf,color:#4a044e
+    class RN,HUD,STORE,DADOS,CENA,CAIXAS,MODELOS app
+    class VIRO,ARCORE,CAM ra
+    class BL,OPT,CONJ,SPLIT,CENTROS,GLBS asset
+    class U ator
