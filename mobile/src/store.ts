@@ -13,6 +13,21 @@ interface AppState {
   alternarOrgao: (id: string) => void // adiciona/remove um órgão da seleção
   alternarGrupo: (ids: string[]) => void // liga/desliga um grupo inteiro
   limparSelecao: () => void
+
+  // Navegação na cena AR: corpo inteiro -> um grupo (órgão) -> partes dele.
+  // null = corpo inteiro. Com grupo aberto, orgaosSelecionados isola partes.
+  grupoAtivo: string | null
+  abrirGrupo: (grupo: string) => void
+  voltar: () => void // sobe um nível: parte -> grupo -> corpo
+
+  // Controles do HUD (botões em App.tsx, aplicados em SpatialScene)
+  corpoNaMesa: boolean // já tocou num plano e o corpo apareceu
+  setCorpoNaMesa: (v: boolean) => void
+  rotacaoY: number // graus em torno do eixo vertical
+  setRotacaoY: (graus: number) => void
+  girar: (graus: number) => void
+  resetContador: number // muda a cada reset; a cena observa e se recompõe
+  resetar: () => void
 }
 
 const initialVisibility = Object.fromEntries(
@@ -52,4 +67,27 @@ export const useStore = create<AppState>((set) => ({
     }),
 
   limparSelecao: () => set({ orgaosSelecionados: [] }),
+
+  grupoAtivo: null,
+  abrirGrupo: (grupo) => set({ grupoAtivo: grupo, orgaosSelecionados: [] }),
+  voltar: () =>
+    set((s) =>
+      s.orgaosSelecionados.length > 0
+        ? { orgaosSelecionados: [] }
+        : { grupoAtivo: null },
+    ),
+
+  corpoNaMesa: false,
+  setCorpoNaMesa: (v) => set({ corpoNaMesa: v }),
+  rotacaoY: 0,
+  setRotacaoY: (graus) => set({ rotacaoY: graus }),
+  girar: (graus) => set((s) => ({ rotacaoY: s.rotacaoY + graus })),
+  resetContador: 0,
+  resetar: () =>
+    set((s) => ({
+      rotacaoY: 0,
+      grupoAtivo: null,
+      orgaosSelecionados: [],
+      resetContador: s.resetContador + 1,
+    })),
 }))
